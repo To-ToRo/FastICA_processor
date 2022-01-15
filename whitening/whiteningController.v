@@ -57,7 +57,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 	end
 	else begin
 		case(state) 
-			S0:
+			S0:	//SUM
 				begin
 					En_mem1 <= 1;
 					GO_cen <= 1;
@@ -75,7 +75,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						cnt<=cnt+1;
 					end
 				end
-			S1:
+			S1:	//DIV
 				begin
 					En_mem1 <= 0;
 					GO_cen <= 1;
@@ -87,9 +87,9 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_mem3<= 0;
 					state<=S2;
 				end	
-			S2:
+			S2:	//SUB
 				begin
-					En_mem1 <= 0;
+					En_mem1 <= 1;
 					GO_cen <= 1;
 					//En_mem2<= 1;
 					GO_cov<= 1;
@@ -108,10 +108,10 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 			S3:
 				begin
 					En_mem1 <= 0;
-					GO_cen <= 0;
+					GO_cen <= 1;
 					En_mem2<= 0;
 					GO_cov<= 1;
-					GO_QR<= 1;
+					GO_QR<= 0;
 					//??
 					En_multi_1<= 0;
 					En_multi_2<= 0;

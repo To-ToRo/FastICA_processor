@@ -97,7 +97,7 @@ initial  begin
 	GO_whitening = 1'b0;
 	New_one = 0;
 
-	#1
+	#2
 	GO_whitening = 1'b1;
 	
 end
