@@ -1,13 +1,3 @@
-`include "fast_controller.v"
-`include "B_decision.v"
-`include "mul1.v"
-`include "mul2.v"
-`include "mul3.v"
-`include "mul4.v"
-`include "mul5.v"
-`include "mean_calc.v"
-`include "subtractor.v"
-
 module FASTICA (
     input clk_fast,
     input go_fast,
@@ -60,7 +50,7 @@ module FASTICA (
 // end
 
 // clk/en are generated from fast_controller
-wire clk_b, clk_sub, clk_mul1, clk_mul2, clk_mul3, clk_mul4, clk_mul5;
+wire clk_b, clk_sub, clk_mul1, clk_mul2, clk_mul3, clk_mul4, clk_mul5, clk_mean;
 wire en_b, en_sub, en_mul1, en_mul2, en_mul3, en_mul4, en_mul5, en_mean;
 // Decided unmixing matrix W. output of B_decision, input of mul1.
 wire signed [25:0] w11_d, w12_d, w13_d, w14_d;
@@ -175,6 +165,7 @@ FAST_CONTROLLER fast_controller (
     .clk_mul3(clk_mul3),
     .clk_mul4(clk_mul4),
     .clk_mul5(clk_mul5),
+    .clk_mean(clk_mean),
 
     .en_b(en_b),
     .en_sub(en_sub),

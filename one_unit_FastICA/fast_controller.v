@@ -1,4 +1,9 @@
-module FAST_CONTROLLER (
+module FAST_CONTROLLER #(
+    parameter [4:0] INIT = 5'd0, // Enable B_DECISION, MUL1, MUL2, MUL3, MUL4, MUL5, SUB. Fast_BUsy
+    parameter [4:0] MEAN = 5'd1, // Enable mean_calc for 128 clocks. Fast_Busy
+    parameter [4:0] SUB = 5'd2, 
+    parameter [4:0] PAUSE = 5'd3 // Disable every modules.
+) (
     input clk_fast,
     input go_fast,
 
@@ -22,6 +27,7 @@ module FAST_CONTROLLER (
     output en_mul5,
     output en_mean
 );
+
 
 reg en_b_reg;
 reg en_sub_reg;
@@ -51,51 +57,103 @@ assign clk_mul5 = clk_fast;
 assign clk_mean = clk_fast;
 
 reg fast_busy_reg;
-
 assign fast_busy = fast_busy_reg;
 
-reg [6:0] clk_cnt;
+reg [4:0] state, next_state;
+reg [7:0] clk_cnt;
 
 always @(posedge clk_fast or negedge go_fast) begin
     if (!go_fast) begin
-        en_b_reg <= 1'b0;
-        en_sub_reg <= 1'b0;
-        en_mul1_reg <= 1'b0;
-        en_mul2_reg <= 1'b0;
-        en_mul3_reg <= 1'b0;
-        en_mul4_reg <= 1'b0;
-        en_mul5_reg <= 1'b0;
-        en_mean_reg <= 1'b0;
-        
-        fast_busy_reg <= 1'b1;
-        
-        clk_cnt <= 0;
+        state <= INIT;
+        next_state <= INIT;
+        clk_cnt <= 8'd0;
     end else begin
-        if (!en_b_reg) begin
-            en_b_reg <= 1'b1;
-        end else if (!en_mul1_reg) begin
-            en_mul1_reg <= 1'b1;
-        end else if (!en_mul2_reg) begin
-            en_mul2_reg <= 1'b1;
-        end else if (!en_mul3_reg) begin
-            en_mul3_reg <= 1'b1;
-        end else if (!en_mul4_reg) begin
-            en_mul4_reg <= 1'b1;
-        end else if (!en_mean_reg) begin
-            en_mean_reg <= 1'b1;
-        end else if (!en_mul5_reg) begin
-            if (clk_cnt == 127) begin
-                en_mul5_reg <= 1'b1;
-                clk_cnt <= 0;
-            end else begin
-                clk_cnt <= clk_cnt + 1'b1;
-            end
-        end else if (!en_sub_reg) begin
-            en_sub_reg <= 1'b1;
-        end else if (!fast_busy_reg) begin
-            fast_busy_reg <= 1'b0;
+        if (state != next_state) begin
+            clk_cnt <= 8'd0;
+        end else begin
+            clk_cnt <= clk_cnt + 8'd1;
         end
+        state <= next_state;
     end
 end
-    
+
+always @(*) begin
+    next_state = 5'bx;
+    case (state)
+            INIT: begin
+                en_b_reg = 1'b1;
+                en_mul1_reg = 1'b1;
+                en_mul2_reg = 1'b1;
+                en_mul3_reg = 1'b1;
+                en_mul4_reg = 1'b1;
+                en_mul5_reg = 1'b1;
+                en_mean_reg = 1'b0;
+                en_sub_reg = 1'b0;
+                fast_busy_reg = 1'b1;
+
+                if (clk_cnt == 8'd3) begin
+                    next_state = MEAN;
+                end else begin
+                    next_state = INIT;
+                end
+            end
+            MEAN: begin
+                en_b_reg = 1'b1;
+                en_mul1_reg = 1'b1;
+                en_mul2_reg = 1'b1;
+                en_mul3_reg = 1'b1;
+                en_mul4_reg = 1'b1;
+                en_mul5_reg = 1'b1;
+                en_mean_reg = 1'b1;
+                en_sub_reg = 1'b0;
+                fast_busy_reg = 1'b1;
+
+                if (clk_cnt == 8'd127) begin
+                    next_state = SUB;
+                end else begin
+                    next_state = MEAN;
+                end
+            end
+            SUB: begin
+                en_b_reg = 1'b0;
+                en_mul1_reg = 1'b0;
+                en_mul2_reg = 1'b0;
+                en_mul3_reg = 1'b0;
+                en_mul4_reg = 1'b0;
+                en_mul5_reg = 1'b0;
+                en_mean_reg = 1'b0;
+                en_sub_reg = 1'b1;
+                fast_busy_reg = 1'b1;
+
+                next_state = PAUSE;
+            end
+            PAUSE: begin
+                en_b_reg = 1'b0;
+                en_sub_reg = 1'b0;
+                en_mul1_reg = 1'b0;
+                en_mul2_reg = 1'b0;
+                en_mul3_reg = 1'b0;
+                en_mul4_reg = 1'b0;
+                en_mul5_reg = 1'b0;
+                en_mean_reg = 1'b0;
+                fast_busy_reg = 1'b0;
+
+                next_state = PAUSE;
+            end
+            default: begin
+                en_b_reg = 1'b0;
+                en_sub_reg = 1'b0;
+                en_mul1_reg = 1'b0;
+                en_mul2_reg = 1'b0;
+                en_mul3_reg = 1'b0;
+                en_mul4_reg = 1'b0;
+                en_mul5_reg = 1'b0;
+                en_mean_reg = 1'b0;
+                fast_busy_reg = 1'b0;
+
+                next_state = PAUSE;
+            end
+        endcase
+end
+
 endmodule
