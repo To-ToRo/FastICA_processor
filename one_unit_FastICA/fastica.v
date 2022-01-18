@@ -17,38 +17,6 @@ module FASTICA (
     output signed [25:0] w41_out, w42_out, w43_out, w44_out
 );
 
-// reg [25:0] Z1 [0:127];
-// reg [25:0] Z2 [0:127];
-// reg [25:0] Z3 [0:127];
-// reg [25:0] Z4 [0:127];
-
-// reg [6:0] z_cnt1, z_cnt2;
-
-// always @(posedge clk_fast or negedge go_fast) begin
-//     if (!go_fast) begin
-//         z_cnt1 <= 7'd0;
-//         z_cnt2 <= 7'd0;
-//     end else begin
-//         if (z_cnt1 == 127) begin
-//             z_cnt1 <= 7'd0;
-//             z_cnt2 <= 7'd124;
-//         end else begin
-//             if (z_cnt1 < 7'd3) begin
-//                 z_cnt2 = 7'd124 + z_cnt1;
-//             end else begin
-//                 z_cnt2 = z_cnt1 - 7'd2;
-//             end
-
-//             Z1[z_cnt1] <= z1;
-//             Z2[z_cnt1] <= z2;
-//             Z3[z_cnt1] <= z3;
-//             Z4[z_cnt1] <= z4;
-
-//             z_cnt1 <= z_cnt1 + 7'd1;
-//         end
-//     end
-// end
-
 // clk/en are generated from fast_controller
 wire clk_b, clk_sub, clk_mul1, clk_mul2, clk_mul3, clk_mul4, clk_mul5, clk_mean;
 wire en_b, en_sub, en_mul1, en_mul2, en_mul3, en_mul4, en_mul5, en_mean;

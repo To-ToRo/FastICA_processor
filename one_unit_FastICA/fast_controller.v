@@ -65,7 +65,6 @@ reg [7:0] clk_cnt;
 always @(posedge clk_fast or negedge go_fast) begin
     if (!go_fast) begin
         state <= INIT;
-        next_state <= INIT;
         clk_cnt <= 8'd0;
     end else begin
         if (state != next_state) begin
