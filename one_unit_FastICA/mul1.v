@@ -13,7 +13,7 @@ module MUL1 (
     input signed [25:0] w31, w32, w33, w34,
     input signed [25:0] w41, w42, w43, w44,
 
-    output signed [25:0] zo1, zo2, zo3, zo4,
+    output reg signed [25:0] zo1, zo2, zo3, zo4,
 
     output signed [25:0] zw1_11, zw1_12, zw1_13, zw1_14,
     output signed [25:0] zw1_21, zw1_22, zw1_23, zw1_24,
@@ -35,11 +35,6 @@ module MUL1 (
     output signed [25:0] zw4_31, zw4_32, zw4_33, zw4_34,
     output signed [25:0] zw4_41, zw4_42, zw4_43, zw4_44
 );
-
-assign zo1 = z1;
-assign zo2 = z2;
-assign zo3 = z3;
-assign zo4 = z4;
 
 reg signed [51:0] zw1_11_reg, zw1_12_reg, zw1_13_reg, zw1_14_reg;
 reg signed [51:0] zw1_21_reg, zw1_22_reg, zw1_23_reg, zw1_24_reg;
@@ -131,6 +126,10 @@ assign zw4_44 = zw4_44_reg[38:13];
 
 always @(posedge clk_mul)
 begin
+    zo1 <= z1;
+    zo2 <= z2;
+    zo3 <= z3;
+    zo4 <= z4;
     if (en_mul) begin
         // active
         zw1_11_reg <= z1 * w11;
