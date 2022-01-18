@@ -36,24 +36,52 @@ module TB_FASTICA;
         .w41_out(w41_out), .w42_out(w42_out), .w43_out(w43_out), .w44_out(w44_out)
    );
 
+   reg signed [3:0] clk_cnt;
+   reg ascent;
+
    initial begin
        clk_fast = 1'b0;
        go_fast = 1'b0;
-       z1 = 26'd8200;
-       z2 = 26'd8200;
-       z3 = 26'd8200;
-       z4 = 26'd8200;
+       z1 = 26'd0;
+       z2 = 26'd0;
+       z3 = 26'd0;
+       z4 = 26'd0;
+
+       ascent = 1'b1;
+
+       clk_cnt = 4'd0;
 
        #10 go_fast = 1'b1;
    end
-
+   
    assign #10 clk_fast = ~clk_fast;
 
    always @(posedge clk_fast) begin
-       z1 <= z1 + 26'd8200;
-       z2 <= z2 + 26'd8200;
-       z3 <= z3 + 26'd8200;
-       z4 <= z4 + 26'd8200;
+        if (ascent) begin
+           clk_cnt <= clk_cnt + 1;
+       end else begin
+           clk_cnt <= clk_cnt - 1;
+       end
+   end
+
+   always @(*) begin
+       if (clk_cnt == 4) begin
+           ascent = 1'b0;
+       end else if(clk_cnt == -4) begin
+           ascent = 1'b1;
+       end
+
+       if (ascent) begin
+           z1 = z1 + 26'd8200;
+           z2 = z2 - 26'd8200;
+           z3 = z3 + 26'd8200;
+           z4 = z4 - 26'd8200;
+       end else begin
+           z1 = z1 - 26'd8200;
+           z2 = z2 + 26'd8200;
+           z3 = z3 - 26'd8200;
+           z4 = z4 + 26'd8200;
+       end
    end
 
 endmodule

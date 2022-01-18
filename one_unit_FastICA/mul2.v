@@ -7,6 +7,8 @@ module MUL2 (
     input clk_mul,
     input en_mul,
 
+    input signed [25:0] zi1, zi2, zi3, zi4,
+
     input signed [25:0] i1_11, i1_12, i1_13, i1_14,
     input signed [25:0] i1_21, i1_22, i1_23, i1_24,
     input signed [25:0] i1_31, i1_32, i1_33, i1_34,
@@ -26,6 +28,8 @@ module MUL2 (
     input signed [25:0] i4_21, i4_22, i4_23, i4_24,
     input signed [25:0] i4_31, i4_32, i4_33, i4_34,
     input signed [25:0] i4_41, i4_42, i4_43, i4_44,
+
+    output signed [25:0] zo1, zo2, zo3, zo4,
 
     output reg signed [25:0] zw1_11, zw1_12, zw1_13, zw1_14,
     output reg signed [25:0] zw1_21, zw1_22, zw1_23, zw1_24,
@@ -67,6 +71,12 @@ module MUL2 (
     output signed [25:0] o4_31, o4_32, o4_33, o4_34,
     output signed [25:0] o4_41, o4_42, o4_43, o4_44
 );
+
+assign zo1 = zi1;
+assign zo2 = zi2;
+assign zo3 = zi3;
+assign zo4 = zi4;
+
 
 reg signed [51:0] o1_11_reg, o1_12_reg, o1_13_reg, o1_14_reg;
 reg signed [51:0] o1_21_reg, o1_22_reg, o1_23_reg, o1_24_reg;

@@ -13,6 +13,8 @@ module MUL1 (
     input signed [25:0] w31, w32, w33, w34,
     input signed [25:0] w41, w42, w43, w44,
 
+    output signed [25:0] zo1, zo2, zo3, zo4,
+
     output signed [25:0] zw1_11, zw1_12, zw1_13, zw1_14,
     output signed [25:0] zw1_21, zw1_22, zw1_23, zw1_24,
     output signed [25:0] zw1_31, zw1_32, zw1_33, zw1_34,
@@ -33,6 +35,11 @@ module MUL1 (
     output signed [25:0] zw4_31, zw4_32, zw4_33, zw4_34,
     output signed [25:0] zw4_41, zw4_42, zw4_43, zw4_44
 );
+
+assign zo1 = z1;
+assign zo2 = z2;
+assign zo3 = z3;
+assign zo4 = z4;
 
 reg signed [51:0] zw1_11_reg, zw1_12_reg, zw1_13_reg, zw1_14_reg;
 reg signed [51:0] zw1_21_reg, zw1_22_reg, zw1_23_reg, zw1_24_reg;
@@ -193,6 +200,74 @@ begin
         zw4_42_reg <= z4 * w42;
         zw4_43_reg <= z4 * w43;
         zw4_44_reg <= z4 * w44;
+    end else begin
+        zw1_11_reg <= w11;
+        zw1_12_reg <= w12;
+        zw1_13_reg <= w13;
+        zw1_14_reg <= w14;
+        zw1_21_reg <= w11;
+        zw1_22_reg <= w12;
+        zw1_23_reg <= w13;
+        zw1_24_reg <= w14;
+        zw1_31_reg <= w11;
+        zw1_32_reg <= w12;
+        zw1_33_reg <= w13;
+        zw1_34_reg <= w14;
+        zw1_41_reg <= w11;
+        zw1_42_reg <= w12;
+        zw1_43_reg <= w13;
+        zw1_44_reg <= w14;
+
+        zw2_11_reg <= w21;
+        zw2_12_reg <= w22;
+        zw2_13_reg <= w23;
+        zw2_14_reg <= w24;
+        zw2_21_reg <= w21;
+        zw2_22_reg <= w22;
+        zw2_23_reg <= w23;
+        zw2_24_reg <= w24;
+        zw2_31_reg <= w21;
+        zw2_32_reg <= w22;
+        zw2_33_reg <= w23;
+        zw2_34_reg <= w24;
+        zw2_41_reg <= w21;
+        zw2_42_reg <= w22;
+        zw2_43_reg <= w23;
+        zw2_44_reg <= w24;
+
+        zw3_11_reg <= w31;
+        zw3_12_reg <= w32;
+        zw3_13_reg <= w33;
+        zw3_14_reg <= w34;
+        zw3_21_reg <= w31;
+        zw3_22_reg <= w32;
+        zw3_23_reg <= w33;
+        zw3_24_reg <= w34;
+        zw3_31_reg <= w31;
+        zw3_32_reg <= w32;
+        zw3_33_reg <= w33;
+        zw3_34_reg <= w34;
+        zw3_41_reg <= w31;
+        zw3_42_reg <= w32;
+        zw3_43_reg <= w33;
+        zw3_44_reg <= w34;
+
+        zw4_11_reg <= w41;
+        zw4_12_reg <= w42;
+        zw4_13_reg <= w43;
+        zw4_14_reg <= w44;
+        zw4_21_reg <= w41;
+        zw4_22_reg <= w42;
+        zw4_23_reg <= w43;
+        zw4_24_reg <= w44;
+        zw4_31_reg <= w41;
+        zw4_32_reg <= w42;
+        zw4_33_reg <= w43;
+        zw4_34_reg <= w44;
+        zw4_41_reg <= w41;
+        zw4_42_reg <= w42;
+        zw4_43_reg <= w43;
+        zw4_44_reg <= w44;
     end
 end
     
