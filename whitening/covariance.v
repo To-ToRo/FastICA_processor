@@ -1,10 +1,10 @@
 module Covariance_block(
 	input wire GO_cov,
 	input wire CLK_cov,
-	input wire signed [15:0]Xcen1,	
-	input wire signed [15:0]Xcen2,
-	input wire signed [15:0]Xcen3,
-	input wire signed [15:0]Xcen4,
+	input wire signed [25:0]Xcen1,	
+	input wire signed [25:0]Xcen2,
+	input wire signed [25:0]Xcen3,
+	input wire signed [25:0]Xcen4,
 	
 	output wire signed [15:0] C11,
 	output wire signed [15:0] C12,
@@ -29,16 +29,16 @@ wire CLK_Multi;
 wire CLK_add_div;
 wire En_Multi;
 wire En_add_div;
-wire signed [15:0] X1X1;
-wire signed [15:0] X1X2;
-wire signed [15:0] X1X3;
-wire signed [15:0] X1X4;
-wire signed [15:0] X2X2;
-wire signed [15:0] X2X3;
-wire signed [15:0] X2X4;
-wire signed [15:0] X3X3;
-wire signed [15:0] X3X4; 
-wire signed [15:0] X4X4;
+wire signed [51:0] X1X1;
+wire signed [51:0] X1X2;
+wire signed [51:0] X1X3;
+wire signed [51:0] X1X4;
+wire signed [51:0] X2X2;
+wire signed [51:0] X2X3;
+wire signed [51:0] X2X4;
+wire signed [51:0] X3X3;
+wire signed [51:0] X3X4; 
+wire signed [51:0] X4X4;
 
 COVAR_Controller cov_controller(
 	.GO(GO_cov),

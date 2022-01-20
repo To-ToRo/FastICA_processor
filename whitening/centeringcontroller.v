@@ -14,7 +14,7 @@ assign CLK_adder = CLK_cen ; //초기값 설정에 의해 이렇게 했음.
 assign CLK_Divider = CLK_cen;
 assign CLK_Sub = CLK_cen ; //이것도 초기값 설정
 
-parameter S0 =0 ,  S1=1 ,  S2=2;
+parameter S0 =0 ,  S1=1 ,  S2=2 , S3=3;
 reg [1:0] state;
 reg [6:0] cnt;
 
@@ -57,13 +57,19 @@ begin
 					En_SUB<=1;
 					if(cnt == 127) begin
 						cnt<=0;
-						state<=S0;
+						state<=S3;
 						CEN_Busy<=0;
 						//CEN_Busy<=1?? SUB? ??? RAM??? ???????.
 					end
 					else begin
 						cnt<=cnt+1;
 					end
+				end
+			S3 : 
+				begin
+					En_SUM<=0;
+					En_DIV<=0;
+					En_SUB<=0;
 				end
 		endcase
 	end

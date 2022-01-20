@@ -6,10 +6,10 @@ module tb_Whitening;
 	reg New_one;
 
 	wire Whitening_busy;
-	wire signed [15:0] Z1;
-	wire signed [15:0] Z2;
-	wire signed [15:0] Z3;
-	wire signed [15:0] Z4;
+	wire signed [25:0] Z1;
+	wire signed [25:0] Z2;
+	wire signed [25:0] Z3;
+	wire signed [25:0] Z4;
 	
 	wire signed [25:0] V11;
 	wire signed [25:0] V12;

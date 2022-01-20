@@ -1,5 +1,3 @@
-`timescale 100ps/100ps
-
 module QR_decomposition(
 GO_QR,CLK_QR,
 cov11,cov12,cov13,cov14,cov21,cov22,cov23,cov24,cov31,cov32,cov33,cov34,cov41,cov42,cov43,cov44,
@@ -27,7 +25,6 @@ wire clk_QR;
 reg [63:0] C11,C12,C13,C14,C21,C22,C23,C24,C31,C32,C33,C34,C41,C42,C43,C44;
 wire [63:0] Q11,Q12,Q13,Q14,Q21,Q22,Q23,Q24,Q31,Q32,Q33,Q34,Q41,Q42,Q43,Q44;
 wire [63:0] R11,R12,R13,R14,R21,R22,R23,R24,R31,R32,R33,R34,R41,R42,R43,R44;
-wire busy_QR;
 reg [63:0] X11 [0:1],X12 [0:1],X13 [0:1],X14 [0:1],X21 [0:1],X22 [0:1],X23 [0:1],X24 [0:1],X31 [0:1],X32 [0:1],X33 [0:1],X34 [0:1],X41 [0:1],X42 [0:1],X43 [0:1],X44 [0:1];
 reg [63:0] Y11 [0:1],Y12 [0:1],Y13 [0:1],Y14 [0:1],Y21 [0:1],Y22 [0:1],Y23 [0:1],Y24 [0:1],Y31 [0:1],Y32 [0:1],Y33 [0:1],Y34 [0:1],Y41 [0:1],Y42 [0:1],Y43 [0:1],Y44 [0:1];
 wire [63:0] Z11 [0:1],Z12 [0:1],Z13 [0:1],Z14 [0:1],Z21 [0:1],Z22 [0:1],Z23 [0:1],Z24 [0:1],Z31 [0:1],Z32 [0:1],Z33 [0:1],Z34 [0:1],Z41 [0:1],Z42 [0:1],Z43 [0:1],Z44 [0:1];
@@ -35,8 +32,7 @@ wire [63:0] Z11 [0:1],Z12 [0:1],Z13 [0:1],Z14 [0:1],Z21 [0:1],Z22 [0:1],Z23 [0:1
 QR QR1(go_QR,clk_QR,
 C11,C12,C13,C14,C21,C22,C23,C24,C31,C32,C33,C34,C41,C42,C43,C44,
 Q11,Q12,Q13,Q14,Q21,Q22,Q23,Q24,Q31,Q32,Q33,Q34,Q41,Q42,Q43,Q44,
-R11,R12,R13,R14,R21,R22,R23,R24,R31,R32,R33,R34,R41,R42,R43,R44,
-busy_QR);
+R11,R12,R13,R14,R21,R22,R23,R24,R31,R32,R33,R34,R41,R42,R43,R44);
 
 Multiplier Multiplier1(
 X11[0],X12[0],X13[0],X14[0],X21[0],X22[0],X23[0],X24[0],X31[0],X32[0],X33[0],X34[0],X41[0],X42[0],X43[0],X44[0],
@@ -54,23 +50,17 @@ integer k;
 always @(posedge CLK_QR) 
 begin
     if(!GO_QR) begin
-        k <= 0;
-        clk_loop <= 0;
+        k = 0;
+        clk_loop = 0;
     end
     else begin
-        k <= k + 1;
+        k = k + 1;
         if(k == 16) begin
-            k <= 0;
-            clk_loop <= clk_loop + 1;
+            k = 0;
+            clk_loop = ~ clk_loop;
         end
     end
 end
-
-always @(negedge busy_QR) 
-    #5 go_QR <= 0;
-
-always @(GO_QR) 
-    BUSY_QR <= GO_QR;
 
 always @(posedge clk_loop or negedge GO_QR) 
     if (!GO_QR) state <= 5'b00000;
@@ -81,6 +71,7 @@ begin
     if (state == 5'b00000) 
         begin
             go_QR <= 0;
+            BUSY_QR <= 1; 
             next_state <= 5'b00001;
         end
     else if (state == 5'b00001)
@@ -96,6 +87,7 @@ begin
         end
     else if (state == 5'b00010)
         begin
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -127,6 +119,7 @@ begin
         end 
     else if(state == 5'b00100)
         begin     
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -165,7 +158,8 @@ begin
             next_state = 5'b00110;
         end   
     else if(state == 5'b00110)
-        begin         
+        begin       
+            go_QR = 0;  
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -204,7 +198,8 @@ begin
             next_state = 5'b01000;
         end        
     else if(state == 5'b01000)
-        begin         
+        begin       
+            go_QR = 0;  
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -242,7 +237,8 @@ begin
             next_state = 5'b01010;
         end        
     else if(state == 5'b01010)
-        begin         
+        begin      
+            go_QR = 0;   
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -281,7 +277,8 @@ begin
             next_state = 5'b01100;
         end        
     else if(state == 5'b01100)
-        begin         
+        begin      
+            go_QR = 0;   
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -320,7 +317,8 @@ begin
             next_state = 5'b01110;
         end        
     else if(state == 5'b01110)
-        begin         
+        begin    
+            go_QR = 0;     
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -359,7 +357,8 @@ begin
             next_state = 5'b10000;
         end        
     else if(state == 5'b10000)
-        begin         
+        begin       
+            go_QR = 0;  
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -398,7 +397,8 @@ begin
             next_state = 5'b10010;    
         end              
     else if(state == 5'b10010)
-        begin         
+        begin        
+            go_QR = 0; 
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -438,6 +438,7 @@ begin
         end              
     else if(state == 5'b10100)
         begin         
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -477,6 +478,7 @@ begin
         end        
     else if(state == 5'b10110)
         begin         
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -516,6 +518,7 @@ begin
         end
     else if(state == 5'b11000)
         begin         
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -554,7 +557,8 @@ begin
             next_state = 5'b11010;    
         end                                      
     else if(state == 5'b11010)
-        begin         
+        begin       
+            go_QR = 0;  
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -594,6 +598,7 @@ begin
         end        
     else if(state == 5'b11100)
         begin         
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
@@ -633,6 +638,7 @@ begin
         end        
     else if(state == 5'b11110)
         begin         
+            go_QR = 0;
             //행렬곱 RQ 구하기
             X11[0] = R11; X12[0] = R12; X13[0] = R13; X14[0] = R14;
             X21[0] = R21; X22[0] = R22; X23[0] = R23; X24[0] = R24;
