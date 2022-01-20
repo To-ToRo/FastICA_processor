@@ -1,4 +1,4 @@
-module  Multi(
+module  CovMulti(
 	input wire En,
 	input wire clk,
 	

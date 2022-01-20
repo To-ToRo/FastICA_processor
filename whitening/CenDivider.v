@@ -1,4 +1,4 @@
-module Divider_unit(
+module CenDivider(
 	input wire En,
 	input wire clk,
 	

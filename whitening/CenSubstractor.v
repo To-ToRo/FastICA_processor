@@ -1,4 +1,4 @@
-module Substractor_unit(
+module CenSubstractor(
 	input wire GO,
 	input wire En,
 	input wire clk,

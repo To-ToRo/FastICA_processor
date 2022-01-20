@@ -1,4 +1,4 @@
-module AdderAndDivider(
+module CovAdderAndDivider(
 	input En,
 	input clk,
 

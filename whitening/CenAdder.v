@@ -1,4 +1,4 @@
-module Adder_unit(
+module CenAdder(
 	input wire En,
 	input wire clk,
 	

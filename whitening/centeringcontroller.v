@@ -1,13 +1,13 @@
-module Centering_Controller_unit(
+module CenteringController(
 	input wire GO_cen,
 	input wire CLK_cen,
 	output reg CEN_Busy,
 	output reg En_SUM,
 	output reg En_DIV,
 	output reg En_SUB,
-	output reg CLK_adder,
-	output reg CLK_Divider,
-	output reg CLK_Sub
+	output wire CLK_adder,
+	output wire CLK_Divider,
+	output wire CLK_Sub
 );
 
 assign CLK_adder = CLK_cen ; //초기값 설정에 의해 이렇게 했음.

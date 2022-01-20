@@ -1,4 +1,4 @@
-module WhiteningControllerUnit(
+module WhiteningController(
 	input wire GO_whitening,
 	input wire CLK_Whitening,
 	input wire New_one,
@@ -63,6 +63,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 		En_mem3<= 0;
 
 		R_w1<=0;
+		R_w2<=0;
 	end
 	else begin
 		case(state) 
@@ -77,6 +78,8 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_multi_1<= 0;
 					En_multi_2<= 0;	
 					En_mem3<= 0;
+					R_w1<=0;
+					R_w2<=0;
 					if(cnt ==127) begin
 						cnt<=0;
 						state <= S1;
@@ -97,6 +100,8 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_multi_1<= 0;
 					En_multi_2<= 0;
 					En_mem3<= 0;
+					R_w1<=0;
+					R_w2<=0;
 				end	
 			S2:	//SUB and COV
 				begin
@@ -111,6 +116,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=0;
+						R_w2<=0;
 						cnt<=cnt+1;
 					end 
 					else if(cnt ==128) begin
@@ -125,6 +131,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=1;
+						R_w2<=0;
 					end 	//not Cen
 					else if(cnt == 129) begin
 						cnt<=cnt+1;	
@@ -139,6 +146,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;	
 						En_eig<=0;
 						R_w1<=1;
+						R_w2<=0;
 					end 	
 					else if(cnt ==130) begin
 						cnt<=cnt+1;
@@ -153,6 +161,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;	
 						En_eig<=0;
 						R_w1<=0;
+						R_w2<=0;
 					end
 					else if(cnt ==131) begin
 						cnt<=0;
@@ -167,6 +176,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;	
 						En_eig<=0;
 						R_w1<=0;
+						R_w2<=0;
 						state <= S3;
 					end
 					else begin
@@ -181,6 +191,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;
 
 						R_w1<=1;
+						R_w2<=0;
 						cnt<=cnt+1;
 					end
 				end
@@ -197,6 +208,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_multi_2<= 0;
 					En_mem3<= 0;
 					R_w1<=0;
+					R_w2<=0;
 				end
 			S4:	//QR계산
 				begin
@@ -212,6 +224,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=0;
+						R_w2<=0;
 					end
 					else begin
 						En_mem1 <= 0;
@@ -224,6 +237,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=0;
+						R_w2<=0;
 					end
 				end
 			S5:	
@@ -240,6 +254,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=0;
+						R_w2<=0;
 						state<=S6;
 					end
 					else begin	//eig계산
@@ -253,6 +268,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_multi_2<= 0;
 						En_mem3<= 0;
 						R_w1<=0;
+						R_w2<=0;
 						cnt<=cnt+1;
 					end
 				end	
@@ -269,6 +285,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_multi_2<= 1;
 					En_mem3<= 0;
 					R_w1<=0;
+					R_w2<=0;
 				end	
 			S7: //multi for Z
 				begin
@@ -283,8 +300,9 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_eig<=0;
 						En_multi_1<= 0;
 						En_multi_2<= 1;
-						En_mem3<= 0;
+						En_mem3<= 1;
 						R_w1<=0;
+						R_w2<=1;
 					end
 					else begin
 						En_mem1 <= 0;
@@ -295,14 +313,25 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_eig<=0;
 						En_multi_1<= 0;
 						En_multi_2<= 1;
-						En_mem3<= 0;
+						En_mem3<= 1;
 						R_w1<=0;
+						R_w2<=1;
 						cnt<=cnt+1;
 					end
 				end	
-			S8: //multi for Z
+			S8: //end
 				begin
-					
+					En_mem1 <= 0;
+					GO_cen <= 0;
+					En_mem2<= 0;
+					GO_cov<= 0;		
+					GO_QR<= 0;
+					En_eig<=0;
+					En_multi_1<= 0;
+					En_multi_2<= 0;
+					En_mem3<= 0;
+					R_w1<=0;
+					R_w2<=0;
 				end	
 			S9:
 				begin

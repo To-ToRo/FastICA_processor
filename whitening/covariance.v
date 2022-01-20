@@ -1,4 +1,4 @@
-module Covariance_block(
+module Covariance(
 	input wire GO_cov,
 	input wire CLK_cov,
 	input wire signed [25:0]Xcen1,	
@@ -40,7 +40,7 @@ wire signed [51:0] X3X3;
 wire signed [51:0] X3X4; 
 wire signed [51:0] X4X4;
 
-COVAR_Controller cov_controller(
+CovController cov_controller(
 	.GO(GO_cov),
 	.CLK(CLK_cov),
 	.COV_busy(COV_busy),
@@ -50,7 +50,7 @@ COVAR_Controller cov_controller(
 	.En_add_div(En_add_div)
 );
 
-Multi mul(
+CovMulti multi(
 	.En(En_Multi),
 	.clk(CLK_Multi),
 	.Xcen1(Xcen1),
@@ -69,7 +69,7 @@ Multi mul(
     .X4X4(X4X4)
 );
 
-AdderAndDivider add_div(
+CovAdderAndDivider add_div(
 	.En(En_add_div),
 	.clk(CLK_add_div),
 	.X1X1(X1X1),

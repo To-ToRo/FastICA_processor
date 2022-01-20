@@ -40,10 +40,10 @@ wire [63:0] m3 [0:3];
 wire [63:0] d3 [0:3];
 wire [63:0] s2;
 
-mul QR_mul1(m1[0],m2[0],m3[0]);
-mul QR_mul2(m1[1],m2[1],m3[1]);
-mul QR_mul3(m1[2],m2[2],m3[2]);
-mul QR_mul4(m1[3],m2[3],m3[3]);
+QR_mul QR_mul1(m1[0],m2[0],m3[0]);
+QR_mul QR_mul2(m1[1],m2[1],m3[1]);
+QR_mul QR_mul3(m1[2],m2[2],m3[2]);
+QR_mul QR_mul4(m1[3],m2[3],m3[3]);
 divider QR_div1(d1[0],d2[0],d3[0]);
 divider QR_div2(d1[1],d2[1],d3[1]);
 divider QR_div3(d1[2],d2[2],d3[2]);

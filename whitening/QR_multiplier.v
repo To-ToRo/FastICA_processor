@@ -1,4 +1,4 @@
-module Multiplier(
+module QR_Multiplier(
 X11,X12,X13,X14,
 X21,X22,X23,X24,
 X31,X32,X33,X34,

@@ -1,16 +1,16 @@
-module COVAR_Controller(
+module CovController(
 	input wire GO,
 	input wire CLK,
 	
 	output reg COV_busy,
-	output reg CLK_Multi,
-	output reg CLK_add_div,
+	output wire CLK_Multi,
+	output wire CLK_add_div,
 	output reg En_Multi,
 	output reg En_add_div
 );
 
 assign CLK_Multi = CLK;
-assign CLK_add_div =CLK;
+assign CLK_add_div = CLK;
 
 parameter S0 =0 ,  S1=1, S2=2, S3=3, S4=4;
 reg [3:0] state;

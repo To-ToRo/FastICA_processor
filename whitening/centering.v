@@ -1,4 +1,4 @@
-module centering_block(
+module Centering(
 	input wire clk,
 	input wire GO,
 	input wire unsigned [25:0]x1_in,
@@ -28,7 +28,7 @@ wire unsigned [25:0] res2;
 wire unsigned [25:0] res3;
 wire unsigned [25:0] res4;
 
-Centering_Controller_unit CCU(
+CenteringController CCU(
 		.GO_cen(GO),
 		.CLK_cen(clk),
 		.CEN_Busy(busy),
@@ -41,7 +41,7 @@ Centering_Controller_unit CCU(
 		
 );
 
-Adder_unit add(
+CenAdder add(
 	.En(En_SUM),
 	.clk(CLK_adder),
 	.x1_in(x1_in),
@@ -54,7 +54,7 @@ Adder_unit add(
 	.sum4(sum4)
 );
 
-Divider_unit div(
+CenDivider div(
 		.En(En_DIV),
 		.clk(CLK_Divider),
 		.sum1(sum1),
@@ -67,7 +67,7 @@ Divider_unit div(
 		.res4(res4)
 );
 
-Substractor_unit sub(
+CenSubstractor sub(
 		.GO(GO),
 		.En(En_SUB),
 		.clk(CLK_Sub),

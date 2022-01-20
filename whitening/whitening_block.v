@@ -101,7 +101,7 @@ wire signed [63:0] E_T31,E_T32,E_T33,E_T34;
 wire signed [63:0] E_T41,E_T42,E_T43,E_T44;
 
 
-WhiteningControllerUnit WCU(
+WhiteningController WCU(
 	.GO_whitening(GO_whitening),
 	.CLK_Whitening(CLK_whitening),
 	.New_one(New_one),	
@@ -146,7 +146,7 @@ ROM rom(
 .data4(X4)
 );
 
-centering_block center(
+Centering center(
 .clk(CLK_cen),
 .GO(GO_cen),
 .x1_in(X1),
@@ -177,7 +177,7 @@ RAM1 ram1(
 );
 
 
-Covariance_block cov(
+Covariance cov(
 	.GO_cov(GO_cov),
 	.CLK_cov(CLK_cov),
 	.Xcen1(q1),	
@@ -284,14 +284,22 @@ Whitening_Multiplier2 multi_2(
 .Z1(Z1), .Z2(Z2), .Z3(Z3), .Z4(Z4)
 );
 
-/*
-RAM2 ram2(
-.clk(CLK_mem3),
-.En(En_mem3),
 
-.busy(mem3_busy)
+RAM2 ram2(
+    .clk(CLK_mem3),
+    .En(En_mem3),
+    .R_w2(R_w2),
+    .addr(addr),
+    .data1(Z1),
+    .data2(Z2),
+    .data3(Z3),
+    .data4(Z4),
+    .q1(), 
+    .q2(),
+    .q3(),
+    .q4()
 );
-*/
+
 
 endmodule
 

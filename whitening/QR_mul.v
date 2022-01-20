@@ -1,4 +1,4 @@
-module mul(a,b,c);
+module QR_mul(a,b,c);
 
 input signed [63:0] a, b;
 output signed [63:0] c;
