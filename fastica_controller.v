@@ -23,15 +23,15 @@ module FASTICA_CONTROLLER #(
     // output clk_mul2,
     output clk_mem1,
 
-    output go_symm,
-    output en_norm,
-    output go_fast,
-    output en_error,
-    output en_mul1,
-    // output en_mul2,
-    output en_mem1,
-    output address_sel_mem1,
-    output rw
+    output reg go_symm,
+    output reg en_norm,
+    output reg go_fast,
+    output reg en_error,
+    output reg en_mul1,
+    // output reg en_mul2,
+    output reg en_mem1,
+    output reg address_sel_mem1,
+    output reg rw
 );
 
 assign clk_symm = clk_fastica;
@@ -149,9 +149,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= MAKE_ORTH
             end
             MAKE_ORTH: begin
-                if (symm_busy) begin
-                    state <= MAKE_ORTH;
-                end else begin
+                if (!symm_busy) begin
                     state <= NORM_DIV;
                 end
             end
@@ -159,12 +157,11 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= FAST_ICA;
             end
             FAST_ICA: begin
-                if (fast_busy) begin
-                    state <= FAST_ICA;
-                end else begin
+                if (!fast_busy) begin
                     state <= ERROR_CALC;
                 end
             end
+            //* 몇 clk 필요한지?
             ERROR_CALC: begin
                 if (error_busy) begin
                     state <= MAKE_ORTH;
