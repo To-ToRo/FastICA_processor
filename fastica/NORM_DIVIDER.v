@@ -1,4 +1,4 @@
-module moduleName (
+module NORM_DIVIDER (
     input clk_norm,
     input en_norm,
 
@@ -13,6 +13,10 @@ module moduleName (
     output reg signed [25:0] w_out41, w_out42, w_out43, w_out44
 );
 
-
+always @(posedge clk_norm) begin
+    if (en_norm) begin
+        
+    end
+end
     
 endmodule
