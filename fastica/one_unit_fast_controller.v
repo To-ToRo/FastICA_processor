@@ -78,7 +78,7 @@ always @(*) begin
             en_mean = 1'b1;
         end
         SUB: begin
-            fast_busy = 1'b1;
+            fast_busy = 1'b0;
             // en_b = 1'b1;
             en_sub = 1'b1;
             en_mul1 = 1'b1;
@@ -88,12 +88,22 @@ always @(*) begin
             en_mul5 = 1'b1;
             en_mean = 1'b1;
         end
-        default: 
+        default: begin
+            fast_busy = 1'b0;
+            // en_b = 1'b1;
+            en_sub = 1'b0;
+            en_mul1 = 1'b0;
+            en_mul2 = 1'b0;
+            en_mul3 = 1'b0;
+            en_mul4 = 1'b0;
+            en_mul5 = 1'b0;
+            en_mean = 1'b0;
+        end
     endcase
 end
 
 always @(posedge clk_fast or negedge go_fast) begin
-    if (!go_fast) begin
+    if (~go_fast) begin
         state <= INIT;
     end else begin
         case (state)
@@ -122,7 +132,7 @@ always @(posedge clk_fast or negedge go_fast) begin
 end
 
 always @(posedge clk_fast or negedge go_fast) begin
-    if (!go_fast) begin
+    if (~go_fast) begin
         clk_cnt <= 8'd0;
     end else begin
         case (state)

@@ -5,7 +5,9 @@ module FASTICA_CONTROLLER #(
     parameter FAST_ICA = 5'd3,
     parameter ERROR_CALC = 5'd4,
     parameter MUL1 = 5'd5,
-    parameter MEM1 = 5'd6
+    parameter MEM1 = 5'd6,
+    parameter DELAY = 5'd7,
+    parameter ERROR_DELAY = 5'd8
 )(
     input clk_fastica,
     input go_fastica,
@@ -15,7 +17,7 @@ module FASTICA_CONTROLLER #(
 
     input isConverge,
 
-    output fastica_busy,
+    output reg fastica_busy,
 
     output clk_symm,
     output clk_norm,
@@ -62,6 +64,16 @@ always @(*) begin
             en_mem1  = 1'b0;
             fastica_busy = 1'b0;
         end
+        DELAY: begin
+            go_symm  = 1'b0;
+            en_norm  = 1'b0;
+            go_fast  = 1'b0;
+            en_error = 1'b0;
+            en_mul1  = 1'b0;
+            // en_mul2  = 1'b0;
+            en_mem1  = 1'b0;
+            fastica_busy = 1'b0;
+        end
         MAKE_ORTH: begin
             go_symm  = 1'b1;
             en_norm  = 1'b0;
@@ -87,6 +99,16 @@ always @(*) begin
             en_norm  = 1'b0;
             go_fast  = 1'b1;
             en_error = 1'b0;
+            en_mul1  = 1'b0;
+            // en_mul2  = 1'b0;
+            en_mem1  = 1'b0;
+            fastica_busy = 1'b1;
+        end
+        ERROR_DELAY: begin
+            go_symm  = 1'b0;
+            en_norm  = 1'b0;
+            go_fast  = 1'b1;
+            en_error = 1'b1;
             en_mul1  = 1'b0;
             // en_mul2  = 1'b0;
             en_mem1  = 1'b0;
@@ -146,15 +168,20 @@ always @(*) begin
 end
 
 always @(posedge clk_fastica or negedge go_fastica) begin
-    if (!go_fastica) begin
+    if (~go_fastica) begin
         state <= INIT;
     end else begin
         case (state)
             INIT: begin
-                state <= MAKE_ORTH
+                state <= DELAY;
+            end
+            DELAY: begin
+                if (clk_cnt == 7'd1) begin
+                    state <= MAKE_ORTH;
+                end
             end
             MAKE_ORTH: begin
-                if (!symm_busy) begin
+                if (~symm_busy && (clk_cnt == 7'd0)) begin
                     state <= NORM_DIV;
                 end
             end
@@ -162,16 +189,19 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= FAST_ICA;
             end
             FAST_ICA: begin
-                if (!fast_busy) begin
-                    state <= ERROR_CALC;
+                if (~fast_busy && (clk_cnt == 7'd0)) begin
+                    state <= ERROR_DELAY;
                 end
+            end
+            ERROR_DELAY: begin
+                state <= ERROR_CALC;
             end
             //? 몇 clk 필요한지
             ERROR_CALC: begin
                 if (isConverge) begin
                     state <= MUL1;
                 end else begin
-                    if (!error_busy) begin
+                    if (~error_busy) begin
                         state <= MAKE_ORTH;
                     end
                 end
@@ -197,14 +227,14 @@ always @(posedge clk_fastica or negedge go_fastica) begin
 end
 
 always @(posedge clk_fastica or negedge go_fastica) begin
-    if (!go_fastica) begin
+    if (~go_fastica) begin
         clk_cnt <= 7'd0;
     end else begin
         case (state)
-            INIT, MAKE_ORTH, NORM_DIV, ERROR_CALC, MUL1: begin
+            INIT, MAKE_ORTH, FAST_ICA, ERROR_CALC, MUL1: begin
                 clk_cnt <= 7'd0;
             end 
-            MEM1: begin
+            MEM1, DELAY, NORM_DIV: begin
                 clk_cnt <= clk_cnt + 7'd1;
             end
             default: begin

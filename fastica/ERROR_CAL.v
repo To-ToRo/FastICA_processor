@@ -6,11 +6,6 @@ module ERROR_CAL(
     input signed [25:0] w_new21, w_new22, w_new23, w_new24,
     input signed [25:0] w_new31, w_new32, w_new33, w_new34,
     input signed [25:0] w_new41, w_new42, w_new43, w_new44,
-    
-    input signed [25:0] w_ica11, w_ica12, w_ica13, w_ica14,
-    input signed [25:0] w_ica21, w_ica22, w_ica23, w_ica24,
-    input signed [25:0] w_ica31, w_ica32, w_ica33, w_ica34,
-    input signed [25:0] w_ica41, w_ica42, w_ica43, w_ica44,
 
     output signed [25:0] w11, w12, w13, w14,
     output signed [25:0] w21, w22, w23, w24,
@@ -23,6 +18,11 @@ module ERROR_CAL(
 
 wire clk_abs1, clk_abs2, clk_sub, clk_abs3, clk_out;
 wire en_abs1, en_abs2, en_sub, en_abs3, en_out;
+
+wire signed [25:0] w_ica11, w_ica12, w_ica13, w_ica14;
+wire signed [25:0] w_ica21, w_ica22, w_ica23, w_ica24;
+wire signed [25:0] w_ica31, w_ica32, w_ica33, w_ica34;
+wire signed [25:0] w_ica41, w_ica42, w_ica43, w_ica44;
 
 wire signed [25:0] abs_w_new11, abs_w_new12, abs_w_new13, abs_w_new14;
 wire signed [25:0] abs_w_new21, abs_w_new22, abs_w_new23, abs_w_new24;
@@ -43,6 +43,23 @@ wire signed [25:0] abs_sub11, abs_sub12, abs_sub13, abs_sub14;
 wire signed [25:0] abs_sub21, abs_sub22, abs_sub23, abs_sub24;
 wire signed [25:0] abs_sub31, abs_sub32, abs_sub33, abs_sub34;
 wire signed [25:0] abs_sub41, abs_sub42, abs_sub43, abs_sub44;
+
+assign w11 = w_ica11;
+assign w12 = w_ica12;
+assign w13 = w_ica13;
+assign w14 = w_ica14;
+assign w21 = w_ica21;
+assign w22 = w_ica22;
+assign w23 = w_ica23;
+assign w24 = w_ica24;
+assign w31 = w_ica31;
+assign w32 = w_ica32;
+assign w33 = w_ica33;
+assign w34 = w_ica34;
+assign w41 = w_ica41;
+assign w42 = w_ica42;
+assign w43 = w_ica43;
+assign w44 = w_ica44;
 
 ERROR_CONTROLLER ERROR_CONTROLLER_1 (
     .clk_error(clk_error),
@@ -132,10 +149,10 @@ ERROR_OUT ERROR_OUT_1 (
     .i2_31(abs_sub31), .i2_32(abs_sub32), .i2_33(abs_sub33), .i2_34(abs_sub34),
     .i2_41(abs_sub41), .i2_42(abs_sub42), .i2_43(abs_sub43), .i2_44(abs_sub44),
     
-    .o11(w11), .o12(w12), .o13(w13), .o14(w14),
-    .o21(w21), .o22(w22), .o23(w23), .o24(w24),
-    .o31(w31), .o32(w32), .o33(w33), .o34(w34),
-    .o41(w41), .o42(w42), .o43(w43), .o44(w44),
+    .o11(w_ica11), .o12(w_ica12), .o13(w_ica13), .o14(w_ica14),
+    .o21(w_ica21), .o22(w_ica22), .o23(w_ica23), .o24(w_ica24),
+    .o31(w_ica31), .o32(w_ica32), .o33(w_ica33), .o34(w_ica34),
+    .o41(w_ica41), .o42(w_ica42), .o43(w_ica43), .o44(w_ica44),
     
     .isConverge(isConverge)
 );

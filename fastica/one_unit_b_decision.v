@@ -37,7 +37,7 @@ assign ow44 = ow44_reg;
 
 always @(posedge clk_b) begin
     if (en_b) begin
-         if (iw11 === 26'bz) begin
+         if (iw11 === 26'bx) begin
             // ow11_reg <= 26'b1111111111111_1101100111001; //-0.1493
             // ow12_reg <= 26'b1111111111111_0110100010110; //-0.5911
             // ow13_reg <= 26'b0000000000000_0110000100100; //0.37934

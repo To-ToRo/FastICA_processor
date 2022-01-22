@@ -149,7 +149,7 @@ ONE_UNIT_FAST_CONTROLLER one_unit_fast_controller (
     .en_mean(en_mean)
 );
 
-B_DECISION b_decision (
+ONE_UNIT_B_DECISION one_unit_b_decision (
     .clk_b(clk_b),
     .en_b(en_b),
 
@@ -164,7 +164,7 @@ B_DECISION b_decision (
     .ow41(w41_d), .ow42(w42_d), .ow43(w43_d), .ow44(w44_d)
 );
 
-ONE_UNIT_MUL1 one_unitmul1(
+ONE_UNIT_MUL1 one_unit_mul1(
     .clk_mul(clk_mul1),
     .en_mul(en_mul1),
     
@@ -385,7 +385,7 @@ ONE_UNIT_MUL5 one_unit_mul5 (
     .ow41(w41_3), .ow42(w42_3), .ow43(w43_3), .ow44(w44_3)
 );
 
-MEAN_CALC mean_calc (
+ONE_UNIT_MEAN_CALC one_unit_mean_calc (
     .clk_mean(clk_mean),
     .en_mean(en_mean),
 

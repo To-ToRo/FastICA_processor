@@ -7,13 +7,14 @@ module SYMM_ORTH (
     input signed [25:0] b31, b32, b33, b34,
     input signed [25:0] b41, b42, b43, b44,
 
+    output symm_busy,
+
     output signed [25:0] w11_symm, w12_symm, w13_symm, w14_symm,
     output signed [25:0] w21_symm, w22_symm, w23_symm, w24_symm,
     output signed [25:0] w31_symm, w32_symm, w33_symm, w34_symm,
     output signed [25:0] w41_symm, w42_symm, w43_symm, w44_symm
 );
 
-wire symm_busy;
 wire clk_mul1, clk_norm, clk_sqrt, clk_sel, clk_mul2, clk_mul3, clk_sub, clk_mul4, clk_abs, clk_test;
 wire en_mul1, en_norm, en_sqrt, en_sel, en_mul2, en_mul3, en_sub, en_mul4, en_abs, en_test;
 wire select;
