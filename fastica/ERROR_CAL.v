@@ -16,6 +16,8 @@ module ERROR_CAL(
     output error_busy
 );
 
+
+
 wire clk_abs1, clk_abs2, clk_sub, clk_abs3, clk_out;
 wire en_abs1, en_abs2, en_sub, en_abs3, en_out;
 
@@ -61,6 +63,32 @@ assign w42 = w_ica42;
 assign w43 = w_ica43;
 assign w44 = w_ica44;
 
+reg signed [25:0] w_new11_reg, w_new12_reg, w_new13_reg, w_new14_reg;
+reg signed [25:0] w_new21_reg, w_new22_reg, w_new23_reg, w_new24_reg;
+reg signed [25:0] w_new31_reg, w_new32_reg, w_new33_reg, w_new34_reg;
+reg signed [25:0] w_new41_reg, w_new42_reg, w_new43_reg, w_new44_reg;
+
+always @(posedge clk_error) begin
+    if (en_error) begin
+        w_new11_reg <= w_new11;
+        w_new12_reg <= w_new12;
+        w_new13_reg <= w_new13;
+        w_new14_reg <= w_new14;
+        w_new21_reg <= w_new21;
+        w_new22_reg <= w_new22;
+        w_new23_reg <= w_new23;
+        w_new24_reg <= w_new24;
+        w_new31_reg <= w_new31;
+        w_new32_reg <= w_new32;
+        w_new33_reg <= w_new33;
+        w_new34_reg <= w_new34;
+        w_new41_reg <= w_new41;
+        w_new42_reg <= w_new42;
+        w_new43_reg <= w_new43;
+        w_new44_reg <= w_new44;
+    end
+end
+
 ERROR_CONTROLLER ERROR_CONTROLLER_1 (
     .clk_error(clk_error),
     .en_error(en_error),
@@ -74,10 +102,10 @@ ERROR_ABS ERROR_ABS_1 (
     .clk_abs(clk_abs1),
     .en_abs(en_abs1),
 
-    .i11(w_new11), .i12(w_new12), .i13(w_new13), .i14(w_new14),
-    .i21(w_new21), .i22(w_new22), .i23(w_new23), .i24(w_new24),
-    .i31(w_new31), .i32(w_new32), .i33(w_new33), .i34(w_new34),
-    .i41(w_new41), .i42(w_new42), .i43(w_new43), .i44(w_new44),
+    .i11(w_new11_reg), .i12(w_new12_reg), .i13(w_new13_reg), .i14(w_new14_reg),
+    .i21(w_new21_reg), .i22(w_new22_reg), .i23(w_new23_reg), .i24(w_new24_reg),
+    .i31(w_new31_reg), .i32(w_new32_reg), .i33(w_new33_reg), .i34(w_new34_reg),
+    .i41(w_new41_reg), .i42(w_new42_reg), .i43(w_new43_reg), .i44(w_new44_reg),
     
     .o11(abs_w_new11), .o12(abs_w_new12), .o13(abs_w_new13), .o14(abs_w_new14),
     .o21(abs_w_new21), .o22(abs_w_new22), .o23(abs_w_new23), .o24(abs_w_new24),

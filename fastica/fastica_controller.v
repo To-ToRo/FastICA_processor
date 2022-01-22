@@ -201,7 +201,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 if (isConverge) begin
                     state <= MUL1;
                 end else begin
-                    if (~error_busy) begin
+                    if (~error_busy && (clk_cnt == 7'd0)) begin
                         state <= MAKE_ORTH;
                     end
                 end
@@ -234,7 +234,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
             INIT, MAKE_ORTH, FAST_ICA, ERROR_CALC, MUL1: begin
                 clk_cnt <= 7'd0;
             end 
-            MEM1, DELAY, NORM_DIV: begin
+            MEM1, DELAY, NORM_DIV, ERROR_DELAY: begin
                 clk_cnt <= clk_cnt + 7'd1;
             end
             default: begin

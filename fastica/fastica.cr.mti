@@ -47,6 +47,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	SYMM_MUL3
 
+} {} {}} C:/Coding/FastICA_processor/fastica/ERROR_ABS.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/ERROR_ABS.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ERROR_ABS
+
+Top level modules:
+	ERROR_ABS
+
 } {} {}} C:/Coding/FastICA_processor/fastica/one_unit_b_decision.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/one_unit_b_decision.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module ONE_UNIT_B_DECISION
@@ -74,13 +81,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	ONE_UNIT_MUL1
-
-} {} {}} C:/Coding/FastICA_processor/fastica/ERROR_ABS.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/ERROR_ABS.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module ERROR_ABS
-
-Top level modules:
-	ERROR_ABS
 
 } {} {}} C:/Coding/FastICA_processor/fastica/STMM_TEST.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/STMM_TEST.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -116,13 +116,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	ONE_UNIT_MUL3
-
-} {} {}} C:/Coding/FastICA_processor/fastica/ERROR_CAL.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/ERROR_CAL.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module ERROR_CAL
-
-Top level modules:
-	ERROR_CAL
 
 } {} {}} C:/Coding/FastICA_processor/fastica/one_unit_fast_controller.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/one_unit_fast_controller.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -214,6 +207,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	TB_FASTICA
+
+} {} {}} C:/Coding/FastICA_processor/fastica/one_unit_subtractor.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/one_unit_subtractor.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ONE_UNIT_SUBTRACTOR
+
+Top level modules:
+	ONE_UNIT_SUBTRACTOR
 
 } {} {}} C:/Coding/FastICA_processor/fastica/symm_controller.v {1 {vlog -work work -stats=none C:/Coding/FastICA_processor/fastica/symm_controller.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
