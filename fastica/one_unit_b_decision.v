@@ -1,4 +1,4 @@
-module B_DECISION (
+module ONE_UNIT_B_DECISION (
     input clk_b,
     input en_b,
 

@@ -1,6 +1,6 @@
 `timescale 100ps/1ps
 
-module TB_FASTICA;
+module TB_ONE_UNIT_FASTICA;
     reg clk_fast;
     reg go_fast;
 

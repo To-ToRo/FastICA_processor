@@ -3,7 +3,7 @@
  * have to consider input sequence
  */
 
-module MUL3 (
+module ONE_UNIT_MUL3 (
     input clk_mul,
     input en_mul,
 

@@ -3,7 +3,7 @@
  * O1 = I1(4x4)^2, O2 = I2^2, O3 = I3^2, O4 = I4^2
  */
 
-module MUL2 (
+module ONE_UNIT_MUL2 (
     input clk_mul,
     input en_mul,
 

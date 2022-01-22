@@ -1,4 +1,4 @@
-module MUL5 (
+module ONE_UNIT_MUL5 (
     input clk_mul,
     input en_mul,
 

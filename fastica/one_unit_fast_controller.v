@@ -1,4 +1,4 @@
-module FAST_CONTROLLER #(
+module ONE_UNIT_FAST_CONTROLLER #(
     parameter [4:0] INIT = 5'd0, // Enable B_DECISION
     parameter [4:0] MUL = 5'd2, // Enable mul
     parameter [4:0] MEAN = 5'd3, // Enable mean_calc for 128 clocks. Fast_Busy

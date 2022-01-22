@@ -1,4 +1,4 @@
-module MEAN_CALC (
+module ONE_UNIT_MEAN_CALC (
     input clk_mean,
     input en_mean,
 

@@ -5,13 +5,15 @@ module FASTICA_CONTROLLER #(
     parameter FAST_ICA = 5'd3,
     parameter ERROR_CALC = 5'd4,
     parameter MUL1 = 5'd5,
-    parameter MEM1 = 5'd6,
+    parameter MEM1 = 5'd6
 )(
     input clk_fastica,
     input go_fastica,
     input symm_busy,
     input fast_busy,
     input error_busy,
+
+    input isConverge,
 
     output fastica_busy,
 
@@ -30,7 +32,7 @@ module FASTICA_CONTROLLER #(
     output reg en_mul1,
     // output reg en_mul2,
     output reg en_mem1,
-    output reg address_sel_mem1,
+    output reg [13:0] address_sel_mem1,
     output reg rw
 );
 
@@ -46,6 +48,9 @@ reg [4:0] state;
 reg [6:0] clk_cnt;
 
 always @(*) begin
+    address_sel_mem1 = 14'd0;
+    rw = 1'b0;
+    
     case (state)
         INIT: begin
             go_symm  = 1'b0;
@@ -161,12 +166,14 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                     state <= ERROR_CALC;
                 end
             end
-            //* 몇 clk 필요한지?
+            //? 몇 clk 필요한지
             ERROR_CALC: begin
-                if (error_busy) begin
-                    state <= MAKE_ORTH;
-                end else begin
+                if (isConverge) begin
                     state <= MUL1;
+                end else begin
+                    if (!error_busy) begin
+                        state <= MAKE_ORTH;
+                    end
                 end
             end
             MUL1: begin

@@ -1,4 +1,4 @@
-module FASTICA (
+module ONE_UNIT_FASTICA (
     input clk_fast,
     input go_fast,
 
@@ -125,7 +125,7 @@ wire signed [25:0] zmul1_1, zmul1_2, zmul1_3, zmul1_4;
 wire signed [25:0] zmul2_1, zmul2_2, zmul2_3, zmul2_4;
 wire signed [25:0] zmul3_1, zmul3_2, zmul3_3, zmul3_4;
 
-FAST_CONTROLLER fast_controller (
+ONE_UNIT_FAST_CONTROLLER one_unit_fast_controller (
     .clk_fast(clk_fast),
     .go_fast(go_fast),
     .fast_busy(fast_busy),
@@ -164,7 +164,7 @@ B_DECISION b_decision (
     .ow41(w41_d), .ow42(w42_d), .ow43(w43_d), .ow44(w44_d)
 );
 
-MUL1 mul1(
+ONE_UNIT_MUL1 one_unitmul1(
     .clk_mul(clk_mul1),
     .en_mul(en_mul1),
     
@@ -198,7 +198,7 @@ MUL1 mul1(
     .zw4_41(zw4_41), .zw4_42(zw4_42), .zw4_43(zw4_43), .zw4_44(zw4_44)
 );
 
-MUL2 mul2 (
+ONE_UNIT_MUL2 one_unit_mul2 (
     .clk_mul(clk_mul2),
     .en_mul(en_mul2),
 
@@ -267,7 +267,7 @@ MUL2 mul2 (
     .o4_41(zw4_2_41), .o4_42(zw4_2_42), .o4_43(zw4_2_43), .o4_44(zw4_2_44)
 );
 
-MUL3 mul3 (
+ONE_UNIT_MUL3 one_unit_mul3 (
     .clk_mul(clk_mul3),
     .en_mul(en_mul3),
 
@@ -336,7 +336,7 @@ MUL3 mul3 (
     .zTw_3_4_41(zw4_3_41), .zTw_3_4_42(zw4_3_42), .zTw_3_4_43(zw4_3_43), .zTw_3_4_44(zw4_3_44)
 );
 
-MUL4 mul4 (
+ONE_UNIT_MUL4 one_unit_mul4 (
     .clk_mul(clk_mul4),
     .en_mul(en_mul4),
     
@@ -370,7 +370,7 @@ MUL4 mul4 (
     .o41(z_zw_3_41), .o42(z_zw_3_42), .o43(z_zw_3_43), .o44(z_zw_3_44)
 );
 
-MUL5 mul5 (
+ONE_UNIT_MUL5 one_unit_mul5 (
     .clk_mul(clk_mul5),
     .en_mul(en_mul5),
 
@@ -401,7 +401,7 @@ MEAN_CALC mean_calc (
 );
 
 
-SUBTRACTOR subtractor (
+ONE_UNIT_SUBTRACTOR one_unit_subtractor (
     .clk_sub(clk_sub),
     .en_sub(en_sub),
 
