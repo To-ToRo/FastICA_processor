@@ -176,7 +176,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= DELAY;
             end
             DELAY: begin
-                if (clk_cnt == 7'd1) begin
+                if (clk_cnt == 7'd0) begin
                     state <= MAKE_ORTH;
                 end
             end

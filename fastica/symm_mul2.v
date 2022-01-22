@@ -34,25 +34,25 @@ module SYMM_MUL2 (
             ow43 <= ((iw43 <<< 1) + iw43) >>> 1;
             ow44 <= ((iw44 <<< 1) + iw44) >>> 1;
         end else begin
-            ow11 <= iw11;
-            ow12 <= iw12;
-            ow13 <= iw13;
-            ow14 <= iw14;
+            // ow11 <= iw11;
+            // ow12 <= iw12;
+            // ow13 <= iw13;
+            // ow14 <= iw14;
 
-            ow21 <= iw21;
-            ow22 <= iw22;
-            ow23 <= iw23;
-            ow24 <= iw24;
+            // ow21 <= iw21;
+            // ow22 <= iw22;
+            // ow23 <= iw23;
+            // ow24 <= iw24;
 
-            ow31 <= iw31;
-            ow32 <= iw32;
-            ow33 <= iw33;
-            ow34 <= iw34;
+            // ow31 <= iw31;
+            // ow32 <= iw32;
+            // ow33 <= iw33;
+            // ow34 <= iw34;
 
-            ow41 <= iw41;
-            ow42 <= iw42;
-            ow43 <= iw43;
-            ow44 <= iw44;
+            // ow41 <= iw41;
+            // ow42 <= iw42;
+            // ow43 <= iw43;
+            // ow44 <= iw44;
         end
     end
 endmodule
