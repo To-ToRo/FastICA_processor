@@ -39,7 +39,7 @@ always @(posedge clk_fast or negedge go_fast) begin
     if (!go_fast) begin
         fast_cnt <= 8'd0;
     end else begin
-        fast_cnt <= fast_cnt + 8'd0;
+        fast_cnt <= fast_cnt + 8'd1;
     end
 end
 

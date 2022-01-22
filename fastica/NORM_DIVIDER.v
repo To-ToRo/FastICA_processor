@@ -44,10 +44,10 @@ always @(posedge clk_norm) begin
         w_out31 <= (w31/w_sum) >>> 25; w_out32 <= (w32/w_sum) >>> 25; w_out33 <= (w33/w_sum) >>> 25; w_out34 <= (w34/w_sum) >>> 25;
         w_out41 <= (w41/w_sum) >>> 25; w_out42 <= (w42/w_sum) >>> 25; w_out43 <= (w43/w_sum) >>> 25; w_out44 <= (w44/w_sum) >>> 25;
     end else begin
-        w_out11 <= w_in11; w_out12 <= w_in12; w_out13 <= w_in13; w_out14 <= w_in14;
-        w_out21 <= w_in21; w_out22 <= w_in22; w_out23 <= w_in23; w_out24 <= w_in24;
-        w_out31 <= w_in31; w_out32 <= w_in32; w_out33 <= w_in33; w_out34 <= w_in34;
-        w_out41 <= w_in41; w_out42 <= w_in42; w_out43 <= w_in43; w_out44 <= w_in44;
+        // w_out11 <= w_in11; w_out12 <= w_in12; w_out13 <= w_in13; w_out14 <= w_in14;
+        // w_out21 <= w_in21; w_out22 <= w_in22; w_out23 <= w_in23; w_out24 <= w_in24;
+        // w_out31 <= w_in31; w_out32 <= w_in32; w_out33 <= w_in33; w_out34 <= w_in34;
+        // w_out41 <= w_in41; w_out42 <= w_in42; w_out43 <= w_in43; w_out44 <= w_in44;
     end
 end
 

@@ -80,10 +80,10 @@ always @(posedge clk_b) begin
             ow22_reg <= iw22;
             ow23_reg <= iw23;
             ow24_reg <= iw24;
-            ow31_reg <= iw41;
-            ow32_reg <= iw42;
-            ow33_reg <= iw43;
-            ow34_reg <= iw44;
+            ow31_reg <= iw31;
+            ow32_reg <= iw32;
+            ow33_reg <= iw33;
+            ow34_reg <= iw34;
             ow41_reg <= iw41;
             ow42_reg <= iw42;
             ow43_reg <= iw43;
