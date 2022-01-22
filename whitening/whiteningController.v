@@ -64,6 +64,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 
 		R_w1<=0;
 		R_w2<=0;
+		Whitening_busy<=1;
 	end
 	else begin
 		case(state) 
@@ -332,6 +333,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					En_mem3<= 0;
 					R_w1<=0;
 					R_w2<=0;
+					Whitening_busy<=0;
 				end	
 			S9:
 				begin
