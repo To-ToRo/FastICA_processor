@@ -27,6 +27,14 @@ begin
                 cnt<=0;
             end
             else begin
+                /* create file of Z_DATA
+                if(cnt == 127) begin
+                    $writememh("INPUT1.txt",RAM_Z1);
+                    $writememh("INPUT2.txt",RAM_Z2);
+                    $writememh("INPUT3.txt",RAM_Z3);
+                    $writememh("INPUT4.txt",RAM_Z4);
+                end
+                */
                 RAM_Z1[cnt] <= data1;
                 RAM_Z2[cnt] <= data2;
                 RAM_Z3[cnt] <= data3;
