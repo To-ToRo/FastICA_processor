@@ -7,7 +7,8 @@ module FASTICA_CONTROLLER #(
     parameter MUL1 = 5'd5,
     parameter MEM1 = 5'd6,
     parameter DELAY = 5'd7,
-    parameter ERROR_DELAY = 5'd8
+    parameter ERROR_DELAY = 5'd8,
+    parameter ORTH_DELAY = 5'd9
 )(
     input clk_fastica,
     input go_fastica,
@@ -69,6 +70,16 @@ always @(*) begin
             en_norm  = 1'b0;
             go_fast  = 1'b0;
             en_error = 1'b0;
+            en_mul1  = 1'b0;
+            // en_mul2  = 1'b0;
+            en_mem1  = 1'b0;
+            fastica_busy = 1'b0;
+        end
+        ORTH_DELAY: begin
+            go_symm  = 1'b0;
+            en_norm  = 1'b0;
+            go_fast  = 1'b0;
+            en_error = 1'b1;
             en_mul1  = 1'b0;
             // en_mul2  = 1'b0;
             en_mem1  = 1'b0;
@@ -176,7 +187,10 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= DELAY;
             end
             DELAY: begin
-                if (clk_cnt == 7'd1) begin
+                state <= ORTH_DELAY;
+            end
+            ORTH_DELAY: begin
+                if (clk_cnt == 7'd4) begin
                     state <= MAKE_ORTH;
                 end
             end
@@ -201,7 +215,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 if (isConverge) begin
                     state <= MUL1;
                 end else begin
-                    if (~error_busy && (clk_cnt == 7'd0)) begin
+                    if (clk_cnt == 7'd4) begin
                         state <= MAKE_ORTH;
                     end
                 end
@@ -231,10 +245,10 @@ always @(posedge clk_fastica or negedge go_fastica) begin
         clk_cnt <= 7'd0;
     end else begin
         case (state)
-            INIT, MAKE_ORTH, FAST_ICA, ERROR_CALC, MUL1: begin
+            INIT, MAKE_ORTH, FAST_ICA, MUL1: begin
                 clk_cnt <= 7'd0;
             end 
-            MEM1, DELAY, NORM_DIV, ERROR_DELAY: begin
+            MEM1, ORTH_DELAY, NORM_DIV, ERROR_DELAY, ERROR_CALC: begin
                 clk_cnt <= clk_cnt + 7'd1;
             end
             default: begin
