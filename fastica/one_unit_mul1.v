@@ -2,7 +2,7 @@
  * MUL 1
  * zw1(4x4) = z(4x1)*w1(1x4) zw2, zw3, zw4
  */
-module MUL1 (
+module ONE_UNIT_MUL1 (
     input clk_mul,
     input en_mul,
     

@@ -7,6 +7,16 @@ module ERROR_ABS(
     input signed [25:0] i31, i32, i33, i34,
     input signed [25:0] i41, i42, i43, i44,
 
+    input reg signed [25:0] iw_new11, iw_new12, iw_new13, iw_new14,
+    input reg signed [25:0] iw_new21, iw_new22, iw_new23, iw_new24,
+    input reg signed [25:0] iw_new31, iw_new32, iw_new33, iw_new34,
+    input reg signed [25:0] iw_new41, iw_new42, iw_new43, iw_new44,
+
+    output reg signed [25:0] ow_new11, ow_new12, ow_new13, ow_new14,
+    output reg signed [25:0] ow_new21, ow_new22, ow_new23, ow_new24,
+    output reg signed [25:0] ow_new31, ow_new32, ow_new33, ow_new34,
+    output reg signed [25:0] ow_new41, ow_new42, ow_new43, ow_new44,
+
     output reg signed [25:0] o11, o12, o13, o14,
     output reg signed [25:0] o21, o22, o23, o24,
     output reg signed [25:0] o31, o32, o33, o34,
@@ -37,12 +47,22 @@ always @(posedge clk_abs) begin
         o11 <= sqrt1; o12 <= sqrt2; o13 <= sqrt3; o14 <= sqrt4; 
         o21 <= sqrt5; o22 <= sqrt6; o23 <= sqrt7; o24 <= sqrt8; 
         o31 <= sqrt9; o32 <= sqrt10; o33 <= sqrt11; o34 <= sqrt12; 
-        o41 <= sqrt13 ; o42 <= sqrt14; o43 <= sqrt15; o44 <= sqrt16; 
+        o41 <= sqrt13; o42 <= sqrt14; o43 <= sqrt15; o44 <= sqrt16; 
+
+        ow_new11 <= iw_new11; ow_new12 <= iw_new11; ow_new13 <= iw_new13; ow_new14 <= iw_new_14;
+        ow_new21 <= iw_new21; ow_new22 <= iw_new21; ow_new23 <= iw_new23; ow_new24 <= iw_new_24;
+        ow_new31 <= iw_new31; ow_new32 <= iw_new31; ow_new33 <= iw_new33; ow_new34 <= iw_new_34;
+        ow_new41 <= iw_new41; ow_new42 <= iw_new41; ow_new43 <= iw_new43; ow_new44 <= iw_new_44;
     end else begin
         o11 <= i11; o12 <= i12; o13 <= i13; o14 <= i14;
         o21 <= i21; o22 <= i22; o23 <= i23; o24 <= i24;
         o31 <= i31; o32 <= i32; o33 <= i33; o34 <= i34;
         o41 <= i41; o42 <= i42; o43 <= i43; o44 <= i44;
+
+        ow_new11 <= iw_new11; ow_new12 <= iw_new11; ow_new13 <= iw_new13; ow_new14 <= iw_new_14;
+        ow_new21 <= iw_new21; ow_new22 <= iw_new21; ow_new23 <= iw_new23; ow_new24 <= iw_new_24;
+        ow_new31 <= iw_new31; ow_new32 <= iw_new31; ow_new33 <= iw_new33; ow_new34 <= iw_new_34;
+        ow_new41 <= iw_new41; ow_new42 <= iw_new41; ow_new43 <= iw_new43; ow_new44 <= iw_new_44;
     end
 end
 

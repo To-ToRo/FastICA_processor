@@ -35,19 +35,19 @@ always @(posedge clk_sqrt) begin
     end
 end
 
-SQRT SQRT1 (
+SQRT1 symm_sqrt1 (
     .x(sum1),
     .y(sqrt1)
 );
-SQRT SQRT2 (
+SQRT1 symm_sqrt2 (
     .x(sum2),
     .y(sqrt2)
 );
-SQRT SQRT3 (
+SQRT1 symm_sqrt3 (
     .x(sum3),
     .y(sqrt3)
 );
-SQRT SQRT4 (
+SQRT1 symm_sqrt4 (
     .x(sum4),
     .y(sqrt4)
 );

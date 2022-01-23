@@ -171,7 +171,7 @@ always @(posedge clk_fast or negedge go_fast) begin
                 state <= MEAN;
             end
             MEAN: begin
-                if (clk_cnt == 8'd125) begin
+                if (clk_cnt == 8'd126) begin
                     state <= MUL5;
                 end
             end

@@ -1,4 +1,4 @@
-module SQRT(x,y);
+module SQRT1(x,y);
 
 input [25:0] x;
 output wire [25:0] y;

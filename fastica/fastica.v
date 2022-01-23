@@ -179,7 +179,7 @@ FASTICA_MUL1 fastica_mul1(
     .w31(w31_error), .w32(w32_error), .w33(w33_error), .w34(w34_error),
     .w41(w41_error), .w42(w42_error), .w43(w43_error), .w44(w44_error),
 
-    .z1(Z1[mul1_cnt]), .z2(Z2[mul1_cnt]), .z3(Z3[mul_cnt]), .z4(Z4[mul_cnt]),
+    .z1(Z1[mul1_cnt]), .z2(Z2[mul1_cnt]), .z3(Z3[mul1_cnt]), .z4(Z4[mul1_cnt]),
 
     .y1(y1), .y2(y2), .y3(y3), .y4(y4)
 );
