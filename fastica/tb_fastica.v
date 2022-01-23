@@ -33,12 +33,11 @@ FASTICA fastica (
        clk_fastica = 1'b0;
        go_fastica = 1'b0;
        clk_cnt = 8'd0;
-       $readmemh("C:/Coding/FastICA_processor/fastica/INPUT1.txt", z1);
-        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT2.txt", z2);
-        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT3.txt", z3);
-        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT4.txt", z4);
+       $readmemh("C:/Coding/FastICA_processor/fastica/INPUT1_order.txt", z1);
+        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT2_order.txt", z2);
+        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT3_order.txt", z3);
+        $readmemh("C:/Coding/FastICA_processor/fastica/INPUT4_order.txt", z4);
        #2 go_fastica = 1'b1;
-        
    end
 
    always @(posedge clk_fastica) begin
