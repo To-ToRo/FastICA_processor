@@ -73,7 +73,7 @@ always @(*) begin
             en_mul1  = 1'b0;
             // en_mul2  = 1'b0;
             en_mem1  = 1'b0;
-            fastica_busy = 1'b0;
+            fastica_busy = 1'b1;
         end
         ORTH_DELAY: begin
             go_symm  = 1'b0;
@@ -83,7 +83,7 @@ always @(*) begin
             en_mul1  = 1'b0;
             // en_mul2  = 1'b0;
             en_mem1  = 1'b0;
-            fastica_busy = 1'b0;
+            fastica_busy = 1'b1;
         end
         MAKE_ORTH: begin
             go_symm  = 1'b1;
@@ -215,7 +215,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 if (isConverge) begin
                     state <= MUL1;
                 end else begin
-                    if (clk_cnt == 7'd4) begin
+                    if (clk_cnt == 7'd5) begin
                         state <= MAKE_ORTH;
                     end
                 end

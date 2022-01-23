@@ -4,6 +4,7 @@ module FASTICA (
 
     input signed [25:0] z1, z2, z3, z4,
 
+    output fastica_busy,
     output signed [25:0] y1, y2, y3, y4
 );
 
