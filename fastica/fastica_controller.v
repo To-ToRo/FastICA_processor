@@ -107,7 +107,7 @@ always @(*) begin
         ERROR_DELAY: begin
             go_symm  = 1'b0;
             en_norm  = 1'b0;
-            go_fast  = 1'b1;
+            go_fast  = 1'b0;
             en_error = 1'b1;
             en_mul1  = 1'b0;
             // en_mul2  = 1'b0;
@@ -176,7 +176,7 @@ always @(posedge clk_fastica or negedge go_fastica) begin
                 state <= DELAY;
             end
             DELAY: begin
-                if (clk_cnt == 7'd0) begin
+                if (clk_cnt == 7'd1) begin
                     state <= MAKE_ORTH;
                 end
             end

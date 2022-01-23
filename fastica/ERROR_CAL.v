@@ -69,24 +69,24 @@ reg signed [25:0] w_new31_reg, w_new32_reg, w_new33_reg, w_new34_reg;
 reg signed [25:0] w_new41_reg, w_new42_reg, w_new43_reg, w_new44_reg;
 
 always @(posedge clk_error) begin
-    if (en_error) begin
-        w_new11_reg <= w_new11;
-        w_new12_reg <= w_new12;
-        w_new13_reg <= w_new13;
-        w_new14_reg <= w_new14;
-        w_new21_reg <= w_new21;
-        w_new22_reg <= w_new22;
-        w_new23_reg <= w_new23;
-        w_new24_reg <= w_new24;
-        w_new31_reg <= w_new31;
-        w_new32_reg <= w_new32;
-        w_new33_reg <= w_new33;
-        w_new34_reg <= w_new34;
-        w_new41_reg <= w_new41;
-        w_new42_reg <= w_new42;
-        w_new43_reg <= w_new43;
-        w_new44_reg <= w_new44;
-    end
+    
+    w_new11_reg <= w_new11;
+    w_new12_reg <= w_new12;
+    w_new13_reg <= w_new13;
+    w_new14_reg <= w_new14;
+    w_new21_reg <= w_new21;
+    w_new22_reg <= w_new22;
+    w_new23_reg <= w_new23;
+    w_new24_reg <= w_new24;
+    w_new31_reg <= w_new31;
+    w_new32_reg <= w_new32;
+    w_new33_reg <= w_new33;
+    w_new34_reg <= w_new34;
+    w_new41_reg <= w_new41;
+    w_new42_reg <= w_new42;
+    w_new43_reg <= w_new43;
+    w_new44_reg <= w_new44;
+    
 end
 
 ERROR_CONTROLLER ERROR_CONTROLLER_1 (
@@ -167,10 +167,10 @@ ERROR_OUT ERROR_OUT_1 (
     .clk_out(clk_out),
     .en_out(en_out),
 
-    .i1_11(w_new11), .i1_12(w_new12), .i1_13(w_new13), .i1_14(w_new14),
-    .i1_21(w_new21), .i1_22(w_new22), .i1_23(w_new23), .i1_24(w_new24),
-    .i1_31(w_new31), .i1_32(w_new32), .i1_33(w_new33), .i1_34(w_new34),
-    .i1_41(w_new41), .i1_42(w_new42), .i1_43(w_new43), .i1_44(w_new44),
+    .i1_11(w_new11_reg), .i1_12(w_new12_reg), .i1_13(w_new13_reg), .i1_14(w_new14_reg),
+    .i1_21(w_new21_reg), .i1_22(w_new22_reg), .i1_23(w_new23_reg), .i1_24(w_new24_reg),
+    .i1_31(w_new31_reg), .i1_32(w_new32_reg), .i1_33(w_new33_reg), .i1_34(w_new34_reg),
+    .i1_41(w_new41_reg), .i1_42(w_new42_reg), .i1_43(w_new43_reg), .i1_44(w_new44_reg),
     
     .i2_11(abs_sub11), .i2_12(abs_sub12), .i2_13(abs_sub13), .i2_14(abs_sub14),
     .i2_21(abs_sub21), .i2_22(abs_sub22), .i2_23(abs_sub23), .i2_24(abs_sub24),

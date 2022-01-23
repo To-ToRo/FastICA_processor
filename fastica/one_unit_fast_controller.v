@@ -1,9 +1,13 @@
 module ONE_UNIT_FAST_CONTROLLER #(
     parameter [4:0] INIT = 5'd0, // Enable B_DECISION
-    parameter [4:0] MUL = 5'd2, // Enable mul
-    parameter [4:0] MEAN = 5'd3, // Enable mean_calc for 128 clocks. Fast_Busy
-    parameter [4:0] SUB = 5'd4, 
-    parameter [4:0] PAUSE = 5'd5 // Disable every modules.
+    parameter [4:0] MUL1 = 5'd2, // Enable mul
+    parameter [4:0] MUL2 = 5'd3, // Enable mul
+    parameter [4:0] MUL3 = 5'd4, // Enable mul
+    parameter [4:0] MUL4 = 5'd5, // Enable mul
+    parameter [4:0] MUL5 = 5'd6, // Enable mul
+    parameter [4:0] MEAN = 5'd7, // Enable mean_calc for 128 clocks. Fast_Busy
+    parameter [4:0] SUB = 5'd8, 
+    parameter [4:0] PAUSE = 5'd9 // Disable every modules.
 ) (
     input clk_fast,
     input go_fast,
@@ -55,7 +59,40 @@ always @(*) begin
             en_mul5 = 1'b0;
             en_mean = 1'b0;
         end
-        MUL: begin
+        MUL1: begin
+            fast_busy = 1'b1;
+            // en_b = 1'b1;
+            en_sub = 1'b0;
+            en_mul1 = 1'b1;
+            en_mul2 = 1'b0;
+            en_mul3 = 1'b0;
+            en_mul4 = 1'b0;
+            en_mul5 = 1'b0;
+            en_mean = 1'b0;
+        end
+        MUL2: begin
+            fast_busy = 1'b1;
+            // en_b = 1'b1;
+            en_sub = 1'b0;
+            en_mul1 = 1'b1;
+            en_mul2 = 1'b1;
+            en_mul3 = 1'b0;
+            en_mul4 = 1'b0;
+            en_mul5 = 1'b0;
+            en_mean = 1'b0;
+        end
+        MUL3: begin
+            fast_busy = 1'b1;
+            // en_b = 1'b1;
+            en_sub = 1'b0;
+            en_mul1 = 1'b1;
+            en_mul2 = 1'b1;
+            en_mul3 = 1'b1;
+            en_mul4 = 1'b0;
+            en_mul5 = 1'b0;
+            en_mean = 1'b0;
+        end
+        MUL4: begin
             fast_busy = 1'b1;
             // en_b = 1'b1;
             en_sub = 1'b0;
@@ -63,7 +100,7 @@ always @(*) begin
             en_mul2 = 1'b1;
             en_mul3 = 1'b1;
             en_mul4 = 1'b1;
-            en_mul5 = 1'b1;
+            en_mul5 = 1'b0;
             en_mean = 1'b0;
         end
         MEAN: begin
@@ -74,6 +111,17 @@ always @(*) begin
             en_mul2 = 1'b1;
             en_mul3 = 1'b1;
             en_mul4 = 1'b1;
+            en_mul5 = 1'b0;
+            en_mean = 1'b1;
+        end
+        MUL5: begin
+            fast_busy = 1'b1;
+            // en_b = 1'b1;
+            en_sub = 1'b0;
+            en_mul1 = 1'b0;
+            en_mul2 = 1'b0;
+            en_mul3 = 1'b0;
+            en_mul4 = 1'b0;
             en_mul5 = 1'b1;
             en_mean = 1'b1;
         end
@@ -81,12 +129,12 @@ always @(*) begin
             fast_busy = 1'b0;
             // en_b = 1'b1;
             en_sub = 1'b1;
-            en_mul1 = 1'b1;
-            en_mul2 = 1'b1;
-            en_mul3 = 1'b1;
-            en_mul4 = 1'b1;
-            en_mul5 = 1'b1;
-            en_mean = 1'b1;
+            en_mul1 = 1'b0;
+            en_mul2 = 1'b0;
+            en_mul3 = 1'b0;
+            en_mul4 = 1'b0;
+            en_mul5 = 1'b0;
+            en_mean = 1'b0;
         end
         default: begin
             fast_busy = 1'b0;
@@ -108,17 +156,27 @@ always @(posedge clk_fast or negedge go_fast) begin
     end else begin
         case (state)
             INIT: begin
-                state <= MUL;
+                state <= MUL1;
             end 
-            MUL: begin
-                if (clk_cnt == 8'd3) begin
-                    state <= MEAN;
-                end
+            MUL1: begin
+                state <= MUL2;
+            end
+            MUL2: begin
+                state <= MUL3;
+            end
+            MUL3: begin
+                state <= MUL4;
+            end
+            MUL4: begin
+                state <= MEAN;
             end
             MEAN: begin
-                if (clk_cnt == 8'd130) begin
-                    state <= SUB;
+                if (clk_cnt == 8'd125) begin
+                    state <= MUL5;
                 end
+            end
+            MUL5: begin
+                state <= SUB;
             end
             SUB: begin
                 state <= INIT;
@@ -139,7 +197,7 @@ always @(posedge clk_fast or negedge go_fast) begin
             INIT, SUB: begin
                 clk_cnt <= 8'd0;
             end
-            MUL, MEAN: begin
+            MEAN: begin
                 clk_cnt <= clk_cnt + 8'd1;
             end
             default: begin

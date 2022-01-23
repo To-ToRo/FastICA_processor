@@ -137,7 +137,7 @@ ONE_UNIT_FASTICA one_unit_fastica(
     .clk_fast(clk_fast),
     .go_fast(go_fast),
 
-    .z1(Z1[fast_cnt]), .z2(Z2[fast_cnt]), .z3(Z3[fast_cnt]), .z4(Z4[fast_cnt]),
+    .z1(Z1[fast_cnt-8'd1]), .z2(Z2[fast_cnt-8'd1]), .z3(Z3[fast_cnt-8'd1]), .z4(Z4[fast_cnt-8'd1]),
 
     .w11_in(w11_norm), .w12_in(w12_norm), .w13_in(w13_norm), .w14_in(w14_norm),
     .w21_in(w21_norm), .w22_in(w22_norm), .w23_in(w23_norm), .w24_in(w24_norm),

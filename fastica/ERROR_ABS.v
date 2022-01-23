@@ -39,10 +39,10 @@ always @(posedge clk_abs) begin
         o31 <= sqrt9; o32 <= sqrt10; o33 <= sqrt11; o34 <= sqrt12; 
         o41 <= sqrt13 ; o42 <= sqrt14; o43 <= sqrt15; o44 <= sqrt16; 
     end else begin
-        // o11 <= i11; o12 <= i12; o13 <= i13; o14 <= i14;
-        // o21 <= i21; o22 <= i22; o23 <= i23; o24 <= i24;
-        // o31 <= i31; o32 <= i32; o33 <= i33; o34 <= i34;
-        // o41 <= i41; o42 <= i42; o43 <= i43; o44 <= i44;
+        o11 <= i11; o12 <= i12; o13 <= i13; o14 <= i14;
+        o21 <= i21; o22 <= i22; o23 <= i23; o24 <= i24;
+        o31 <= i31; o32 <= i32; o33 <= i33; o34 <= i34;
+        o41 <= i41; o42 <= i42; o43 <= i43; o44 <= i44;
     end
 end
 
