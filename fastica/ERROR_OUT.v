@@ -29,17 +29,17 @@ always @(posedge clk_out) begin
         o21 <= i1_21; o22 <= i1_22; o23 <= i1_23; o24 <= i1_24;
         o31 <= i1_31; o32 <= i1_32; o33 <= i1_33; o34 <= i1_34;
         o41 <= i1_41; o42 <= i1_42; o43 <= i1_43; o44 <= i1_44;
-        if (distance == 0) begin
-            isConverge = 1;
+        if (distance < 30'd2) begin
+            isConverge <= 1;
         end else begin
-            isConverge = 0;
+            isConverge <= 0;
         end
     end else begin
         o11 <= i1_11; o12 <= i1_12; o13 <= i1_13; o14 <= i1_14;
         o21 <= i1_21; o22 <= i1_22; o23 <= i1_23; o24 <= i1_24;
         o31 <= i1_31; o32 <= i1_32; o33 <= i1_33; o34 <= i1_34;
         o41 <= i1_41; o42 <= i1_42; o43 <= i1_43; o44 <= i1_44;
-        isConverge = 0;
+        isConverge <= 0;
     end
 end
 
