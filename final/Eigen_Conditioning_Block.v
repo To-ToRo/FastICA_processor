@@ -102,7 +102,7 @@ begin
         D_inv_sqrt41 <= 0;
         D_inv_sqrt42 <= 0;
         D_inv_sqrt43 <= 0;
-        cnt<=cnt+1;
+        cnt<=cnt+1'b1;
        
     end
     else begin

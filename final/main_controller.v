@@ -19,11 +19,11 @@ reg [7:0] cnt;
             
 always @(posedge clk or negedge go) begin
     if(!go) begin
-        cnt <= 0;
+        cnt <= 1'b0;
         state <= 5'd0;
     end else begin
-        if(state == 5'd4) begin
-            cnt <= cnt + 1;
+        if(state == 5'd5) begin
+            cnt <= cnt + 1'b1;
         end
         state <= next_state;
     end
@@ -62,49 +62,61 @@ always @(*)
             go_fastica        <= 0;
             new_one           <= 0;
             rw                <= 0;
-            address_sel_mem1  <= 0;      
+            address_sel_mem1  <= 0;
+            next_state        <= 5'd3;
         end else begin
             go_whitening      <= 1;
-            go_ram1           <= 1;
+            go_ram1           <= 0;
             go_fastica        <= 0;
             new_one           <= 0;
-            rw                <= 1;
+            rw                <= 0;
             address_sel_mem1  <= 0;    
             next_state        <= 5'd4;
         end
     end else if (state == 5'd4) begin
         go_whitening      <= 1;
         go_ram1           <= 1;
+        go_fastica        <= 0;
+        new_one           <= 0;
+        rw                <= 1;
+        address_sel_mem1  <= 0;    
+        next_state        <= 5'd5;
+    end else if (state == 5'd5) begin
+        go_whitening      <= 1;
+        go_ram1           <= 1;
         go_fastica        <= 1;
         new_one           <= 0;
         rw                <= 1;
         address_sel_mem1  <= 0;    
-        if(cnt == 125) next_state = 5'd5;
-    end else if (state == 5'd5) begin
+        if(cnt == 125) next_state = 5'd6;
+        else next_state = 5'd5;
+    end else if (state == 5'd6) begin
         go_whitening      <= 0;
         go_ram1           <= 1;
         go_fastica        <= 1;
         new_one           <= 0;
         rw                <= 1;
         address_sel_mem1  <= 0;  
-        next_state        = 5'd6;         
-    end else if (state == 5'd6) begin
+        next_state        <= 5'd7;         
+    end else begin
         if(fastica_busy) begin
             go_whitening      <= 0;
             go_ram1           <= 0;
             go_fastica        <= 1;
             new_one           <= 0;
             rw                <= 0;
-            address_sel_mem1  <= 0;  
+            address_sel_mem1  <= 0;
+            next_state        <= 5'd7;
         end else begin
             go_whitening      <= 0;
             go_ram1           <= 0;
             go_fastica        <= 0;
             new_one           <= 0;
             rw                <= 0;
-            address_sel_mem1  <= 0; 
+            address_sel_mem1  <= 0;
+            next_state        <= 5'd7;
         end          
-    end
+    end 
 end    
 
 endmodule

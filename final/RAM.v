@@ -69,8 +69,8 @@ always @ (posedge clk)
 begin
     if (GO)  begin
         if (RW) begin
-            if(cnt==128) begin
-                cnt<=0;
+            if(cnt == 8'd128) begin
+                cnt<=1'b0;
             end
             else begin
                 RAM_Z1[cnt] <= Z1_in;
@@ -81,22 +81,22 @@ begin
                 Z2_out <= Z2_in;
                 Z3_out <= Z3_in;
                 Z4_out <= Z4_in;
-                cnt<=cnt+1;
+                cnt <= cnt + 1'b1;
             end
         end 
         else begin
             if(cnt==128) begin
-                cnt<=0;
+                cnt <= 1'b0;
             end
             Z1_out <= RAM_Z1[cnt]; 
             Z2_out <= RAM_Z2[cnt];
             Z3_out <= RAM_Z3[cnt];
             Z4_out <= RAM_Z4[cnt];
-            cnt<=cnt+1;
+            cnt<=cnt+1'b1;
         end
     end
     else begin
-         cnt<=0;
+         cnt <= 1'b0;
     end
 end
 

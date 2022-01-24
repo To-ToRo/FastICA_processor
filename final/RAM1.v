@@ -23,7 +23,7 @@ always @ (posedge clk)
 begin
     if (En)  begin
         if (R_w1) begin
-            if(cnt==128) begin
+            if(cnt==8'd128) begin
                 cnt<=0;
             end
             else begin
@@ -35,18 +35,18 @@ begin
                 q2 <= data2;
                 q3 <= data3;
                 q4 <= data4;
-                cnt<=cnt+1;
+                cnt<=cnt+1'b1;
             end
         end 
         else begin
-            if(cnt==128) begin
+            if(cnt==8'd128) begin
                 cnt<=0;
             end
             q1 <= RAM1[cnt]; 
             q2 <= RAM2[cnt];
             q3 <= RAM3[cnt];
             q4 <= RAM4[cnt];
-            cnt<=cnt+1;
+            cnt<=cnt+1'b1;
         end
     end
     else begin

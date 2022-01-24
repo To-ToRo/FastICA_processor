@@ -1,10 +1,10 @@
 module Centering(
 	input wire clk,
 	input wire GO,
-	input wire unsigned [25:0]x1_in,
-	input wire unsigned [25:0]x2_in,
-	input wire unsigned [25:0]x3_in,
-	input wire unsigned [25:0]x4_in,
+	input wire signed [25:0]x1_in,
+	input wire signed [25:0]x2_in,
+	input wire signed [25:0]x3_in,
+	input wire signed [25:0]x4_in,
 	output wire signed [25:0]x1_out,
 	output wire signed [25:0]x2_out,
 	output wire signed [25:0]x3_out,
@@ -19,14 +19,14 @@ wire  CLK_adder;
 wire  CLK_Divider;
 wire  CLK_Sub;
 
-wire unsigned [39:0] sum1;
-wire unsigned [39:0] sum2;
-wire unsigned [39:0] sum3;
-wire unsigned [39:0] sum4;
-wire unsigned [25:0] res1;
-wire unsigned [25:0] res2;
-wire unsigned [25:0] res3;
-wire unsigned [25:0] res4;
+wire signed [39:0] sum1;
+wire signed [39:0] sum2;
+wire signed [39:0] sum3;
+wire signed [39:0] sum4;
+wire signed [25:0] res1;
+wire signed [25:0] res2;
+wire signed [25:0] res3;
+wire signed [25:0] res4;
 
 CenteringController CCU(
 		.GO_cen(GO),

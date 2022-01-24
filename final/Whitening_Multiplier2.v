@@ -21,10 +21,10 @@ reg signed [51:0] Z2_reg;
 reg signed [51:0] Z3_reg;
 reg signed [51:0] Z4_reg;
 
-assign Z1 = Z1_reg >>> 13; //Z1_reg[38:13]; 
-assign Z2 = Z2_reg >>> 13; //Z2_reg[38:13];
-assign Z3 = Z3_reg >>> 13; //Z3_reg[38:13];
-assign Z4 = Z4_reg >>> 13; //Z4_reg[38:13];
+assign Z1 = Z1_reg[38:13]; //Z1_reg[38:13]; 
+assign Z2 = Z2_reg[38:13]; //Z2_reg[38:13];
+assign Z3 = Z3_reg[38:13]; //Z3_reg[38:13];
+assign Z4 = Z4_reg[38:13]; //Z4_reg[38:13];
 reg signed [25:0] V11_reg,V12_reg,V13_reg,V14_reg;
 reg signed [25:0] V21_reg,V22_reg,V23_reg,V24_reg;
 reg signed [25:0] V31_reg,V32_reg,V33_reg,V34_reg;
@@ -51,7 +51,7 @@ always @(posedge clk) begin
 [V31] [V32] [V33] [V34] [X3] ~
 [V41] [V42] [V43] [V44] [X4] ~
 */
-        cnt<=cnt+1;
+        cnt<=cnt+1'b1;
         end
         else begin
             Z1_reg <= V11_reg*X1 + V12_reg*X2 + V13_reg*X3 + V14_reg*X4;
@@ -67,7 +67,5 @@ always @(posedge clk) begin
         Z4_reg<=0;
         cnt<=0;
     end
-
-
 end
 endmodule

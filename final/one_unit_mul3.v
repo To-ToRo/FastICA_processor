@@ -53,7 +53,7 @@ module ONE_UNIT_MUL3 (
     // z
     output reg signed [25:0] zo1, zo2, zo3, zo4,
 
-    // (zTw)^2
+    // (zTw)^3
     output signed [25:0] zTw_3_1_11, zTw_3_1_12, zTw_3_1_13, zTw_3_1_14,
     output signed [25:0] zTw_3_1_21, zTw_3_1_22, zTw_3_1_23, zTw_3_1_24,
     output signed [25:0] zTw_3_1_31, zTw_3_1_32, zTw_3_1_33, zTw_3_1_34,

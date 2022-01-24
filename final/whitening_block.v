@@ -26,30 +26,30 @@ module WHITENING (
 	output wire signed [25:0] V43,
 	output wire signed [25:0] V44,
 	
-	output wire signed [15:0] C11,
-	output wire signed [15:0] C12,
-	output wire signed [15:0] C13,
-	output wire signed [15:0] C14,
-	output wire signed [15:0] C21,
-	output wire signed [15:0] C22,
-	output wire signed [15:0] C23,
-	output wire signed [15:0] C24,
-	output wire signed [15:0] C31,
-	output wire signed [15:0] C32,
-	output wire signed [15:0] C33,
-	output wire signed [15:0] C34,
-	output wire signed [15:0] C41,
-	output wire signed [15:0] C42,
-	output wire signed [15:0] C43,
-	output wire signed [15:0] C44
+	output wire signed [25:0] C11,
+	output wire signed [25:0] C12,
+	output wire signed [25:0] C13,
+	output wire signed [25:0] C14,
+	output wire signed [25:0] C21,
+	output wire signed [25:0] C22,
+	output wire signed [25:0] C23,
+	output wire signed [25:0] C24,
+	output wire signed [25:0] C31,
+	output wire signed [25:0] C32,
+	output wire signed [25:0] C33,
+	output wire signed [25:0] C34,
+	output wire signed [25:0] C41,
+	output wire signed [25:0] C42,
+	output wire signed [25:0] C43,
+	output wire signed [25:0] C44
 );
 
 reg [13:0] addr;
 
-wire unsigned [25:0]X1;
-wire unsigned [25:0]X2;
-wire unsigned [25:0]X3;
-wire unsigned [25:0]X4;
+wire signed [25:0]X1;
+wire signed [25:0]X2;
+wire signed [25:0]X3;
+wire signed [25:0]X4;
 
 wire signed [25:0]Xcen1;
 wire signed [25:0]Xcen2;
@@ -59,7 +59,6 @@ wire signed [25:0]q1;
 wire signed [25:0]q2;
 wire signed [25:0]q3;
 wire signed [25:0]q4;
-
 
 wire cov_busy;
 wire cen_busy;
@@ -100,6 +99,7 @@ wire signed [63:0] E_T21,E_T22,E_T23,E_T24;
 wire signed [63:0] E_T31,E_T32,E_T33,E_T34;
 wire signed [63:0] E_T41,E_T42,E_T43,E_T44;
 
+wire signed [25:0] Z1_in, Z2_in, Z3_in, Z4_in;
 
 WhiteningController WCU(
 	.GO_whitening(GO_whitening),
@@ -109,7 +109,7 @@ WhiteningController WCU(
 	
 	.COV_busy(cov_busy),
 	.QR_busy(qr_busy),
-	.CEN_busy(cen_busy),
+	// .CEN_busy(cen_busy),
 	.Whitening_busy(Whitening_busy),
 	
 	.En_mem1(En_mem1),
@@ -281,7 +281,7 @@ Whitening_Multiplier2 multi_2(
 .V31(V31), .V32(V32), .V33(V33), .V34(V34), 
 .V41(V41), .V42(V42), .V43(V43), .V44(V44), 
 .X1(q1), .X2(q2), .X3(q3), .X4(q4),
-.Z1(Z1), .Z2(Z2), .Z3(Z3), .Z4(Z4)
+.Z1(Z1_in), .Z2(Z2_in), .Z3(Z3_in), .Z4(Z4_in)
 );
 
 
@@ -290,16 +290,15 @@ RAM2 ram2(
     .En(En_mem3),
     .R_w2(R_w2),
     .addr(addr),
-    .data1(Z1),
-    .data2(Z2),
-    .data3(Z3),
-    .data4(Z4),
-    .q1(), 
-    .q2(),
-    .q3(),
-    .q4()
+    .data1(Z1_in),
+    .data2(Z2_in),
+    .data3(Z3_in),
+    .data4(Z4_in),
+    .q1(Z1), 
+    .q2(Z2),
+    .q3(Z3),
+    .q4(Z4)
 );
-
 
 endmodule
 

@@ -2,14 +2,14 @@ module CenAdder(
 	input wire En,
 	input wire clk,
 	
-	input wire unsigned [25:0] x1_in,
-	input wire unsigned [25:0] x2_in,
-	input wire unsigned [25:0] x3_in,
-	input wire unsigned [25:0] x4_in,
-	output reg unsigned [39:0] sum1,
-	output reg unsigned [39:0] sum2,
-	output reg unsigned [39:0] sum3,
-	output reg unsigned [39:0] sum4
+	input wire signed [25:0] x1_in,
+	input wire signed [25:0] x2_in,
+	input wire signed [25:0] x3_in,
+	input wire signed [25:0] x4_in,
+	output reg signed [39:0] sum1,
+	output reg signed [39:0] sum2,
+	output reg signed [39:0] sum3,
+	output reg signed [39:0] sum4
 );
 
 

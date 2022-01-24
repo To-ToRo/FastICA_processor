@@ -5,7 +5,7 @@ module WhiteningController(
 	
 	input wire 	COV_busy,
 	input wire  QR_busy,
-	output reg  CEN_busy,
+	// input reg  CEN_busy,
 	
 	output reg  Whitening_busy,
 	
@@ -44,7 +44,7 @@ assign CLK_multi_1 = CLK_Whitening;
 assign CLK_multi_2 = CLK_Whitening;
 assign CLK_eig = CLK_Whitening;
 
-parameter S0=0, S1=1, S2=2, S3=3, S4=4, S5=5, S6=6, S7=7, S8=8, S9=9, S10=10;
+parameter S0=5'd0, S1=5'd1, S2=5'd2, S3=5'd3, S4=5'd4, S5=5'd5, S6=5'd6, S7=5'd7, S8=5'd8, S9=5'd9, S10=5'd10;
 reg [4:0] state;
 reg [7:0] cnt;
 
@@ -82,12 +82,12 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					R_w1<=0;
 					R_w2<=0;
 					Whitening_busy<=1;
-					if(cnt ==127) begin
+					if(cnt ==8'd127) begin
 						cnt<=0;
 						state <= S1;
 					end
 					else begin
-						cnt<=cnt+1;
+						cnt<=cnt+1'b1;
 					end
 				end
 			S1:	//DIV
@@ -107,7 +107,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 				end	
 			S2:	//SUB and COV
 				begin
-					if(cnt <= 1 ) begin
+					if(cnt < 8'd2) begin
 						En_mem1 <= 1;
 						GO_cen <= 1;
 						En_mem2<= 0;
@@ -119,10 +119,10 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;
 						R_w1<=0;
 						R_w2<=0;
-						cnt<=cnt+1;
+						cnt<=cnt+1'b1;
 					end 
-					else if(cnt ==128) begin
-						cnt<= cnt+1;
+					else if(cnt == 8'd128) begin
+						cnt<= cnt+1'b1;
 						En_mem1 <= 0;
 						GO_cen <= 1;
 						En_mem2<= 1;
@@ -135,8 +135,8 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						R_w1<=1;
 						R_w2<=0;
 					end 	//not Cen
-					else if(cnt == 129) begin
-						cnt<=cnt+1;	
+					else if(cnt == 8'd129) begin
+						cnt<=cnt+1'b1;	
 						En_mem1 <= 0;
 						GO_cen <= 0;
 						En_mem2<= 1;
@@ -150,8 +150,8 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						R_w1<=1;
 						R_w2<=0;
 					end 	
-					else if(cnt ==130) begin
-						cnt<=cnt+1;
+					else if(cnt == 8'd130) begin
+						cnt<=cnt+1'b1;
 						En_mem1 <= 0;
 						GO_cen <= 0;
 						En_mem2<= 0;
@@ -165,7 +165,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						R_w1<=0;
 						R_w2<=0;
 					end
-					else if(cnt ==131) begin
+					else if(cnt ==8'd131) begin
 						cnt<=0;
 						En_mem1 <= 0;
 						GO_cen <= 0;
@@ -194,10 +194,10 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 
 						R_w1<=1;
 						R_w2<=0;
-						cnt<=cnt+1;
+						cnt<=cnt+1'b1;
 					end
 				end
-			S3:	//23ºñÆ® ½¬ÇÁÆ®
+			S3:	//23ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®
 				begin
 					state <= S4;
 					En_mem1 <= 0;
@@ -212,7 +212,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					R_w1<=0;
 					R_w2<=0;
 				end
-			S4:	//QR°è»ê
+			S4:	//QRï¿½ï¿½ï¿½
 				begin
 					if(QR_busy==0) begin
 						state <= S5;
@@ -243,8 +243,8 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					end
 				end
 			S5:	
-				begin //multi°è»ê
-					if(cnt==3) begin
+				begin //multiï¿½ï¿½ï¿½
+					if(cnt==8'd3) begin
 						cnt<=0;
 						En_mem1 <= 0;
 						GO_cen <= 0;
@@ -259,7 +259,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						R_w2<=0;
 						state<=S6;
 					end
-					else begin	//eig°è»ê
+					else begin	//eigï¿½ï¿½ï¿½
 						En_mem1 <= 0;
 						GO_cen <= 0;
 						En_mem2<= 0;
@@ -271,7 +271,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 0;
 						R_w1<=0;
 						R_w2<=0;
-						cnt<=cnt+1;
+						cnt<=cnt+1'b1;
 					end
 				end	
 			S6:	//multi for V
@@ -292,7 +292,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 			S7: //multi for Z
 				begin
 				    Whitening_busy<=0;
-					if(cnt==127) begin
+					if(cnt==8'd127) begin
 						cnt<=0;
 						state<=S8;
 						En_mem1 <= 0;
@@ -319,7 +319,7 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 						En_mem3<= 1;
 						R_w1<=0;
 						R_w2<=1;
-						cnt<=cnt+1;
+						cnt<=cnt+1'b1;
 					end
 				end	
 			S8: //end
@@ -336,10 +336,6 @@ always @(posedge CLK_Whitening or negedge GO_whitening) begin
 					R_w1<=0;
 					R_w2<=0;
 				end	
-			S9:
-				begin
-					
-				end
 		endcase 
 	end
 end

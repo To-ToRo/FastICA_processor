@@ -33,23 +33,23 @@ always @ (posedge clk) begin
 			cnt<=0;
 		end
 		else begin 
-			X1X1<= Xcen1 * Xcen1;
-			X1X2<= Xcen1 * Xcen2;
-			X1X3<= Xcen1 * Xcen3;
-			X1X4<= Xcen1 * Xcen4;
+			X1X1 <= Xcen1 * Xcen1;
+			X1X2 <= Xcen1 * Xcen2;
+			X1X3 <= Xcen1 * Xcen3;
+			X1X4 <= Xcen1 * Xcen4;
 			//X2X1<=Xcen2 * Xcen1
-			X2X2<= Xcen2 * Xcen2;
-			X2X3<= Xcen2 * Xcen3;
-			X2X4<= Xcen2 * Xcen4;
+			X2X2 <= Xcen2 * Xcen2;
+			X2X3 <= Xcen2 * Xcen3;
+			X2X4 <= Xcen2 * Xcen4;
 			//X3X1<=Xcen3 * Xcen1;
 			//X3X2<=Xcen3 * Xcen2
-			X3X3<=Xcen3 * Xcen3;
-			X3X4<=Xcen3 * Xcen4;
+			X3X3 <= Xcen3 * Xcen3;
+			X3X4 <= Xcen3 * Xcen4;
 			//X4X1<=Xcen4 * Xcen1
 			//X4X2<=Xcen4 * Xcen2
 			//X4X3<=Xcen4 * Xcen3
-			X4X4<=Xcen4 * Xcen4;
-			cnt<=cnt+1;
+			X4X4 <= Xcen4 * Xcen4;
+			cnt<=cnt+1'b1;
 		end
 	end
 	else begin

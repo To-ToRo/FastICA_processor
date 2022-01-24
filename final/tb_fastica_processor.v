@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 100ps/1ps
 module TB_FASTICA_PROCESSOR();
 
     reg go,clk;
@@ -13,7 +13,7 @@ module TB_FASTICA_PROCESSOR();
     .Y3(Y3),
     .Y4(Y4));
     
-    always #5 clk = ~clk;
+    always #1 clk = ~clk;
     
     initial begin
         clk = 0;

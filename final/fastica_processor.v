@@ -18,7 +18,7 @@ wire [13:0] address_sel_mem1;
 wire signed [25:0] Z1_1, Z2_1, Z3_1, Z4_1;
 wire signed [25:0] Z1_2, Z2_2, Z3_2, Z4_2;
 wire signed [25:0] V11, V12, V13, V14, V21, V22, V23, V24, V31, V32, V33, V34, V41, V42, V43, V44;
-wire signed [15:0] C11, C12, C13, C14, C21, C22, C23, C24, C31, C32, C33, C34, C41, C42, C43, C44;
+wire signed [25:0] C11, C12, C13, C14, C21, C22, C23, C24, C31, C32, C33, C34, C41, C42, C43, C44;
 
 MAIN_CONTROLLER CONTROLLER (
 	.go(go),

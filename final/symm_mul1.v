@@ -23,22 +23,22 @@ reg [51:0] dot11, dot12, dot13, dot14,
            dot31, dot32, dot33, dot34,
            dot41, dot42, dot43, dot44;
 
-assign w11_2 = dot11[38:13];
-assign w12_2 = dot12[38:13];
-assign w13_2 = dot13[38:13];
-assign w14_2 = dot14[38:13];
-assign w21_2 = dot21[38:13];
-assign w22_2 = dot22[38:13];
-assign w23_2 = dot23[38:13];
-assign w24_2 = dot24[38:13];
-assign w31_2 = dot31[38:13];
-assign w32_2 = dot32[38:13];
-assign w33_2 = dot33[38:13];
-assign w34_2 = dot34[38:13];
-assign w41_2 = dot41[38:13];
-assign w42_2 = dot42[38:13];
-assign w43_2 = dot43[38:13];
-assign w44_2 = dot44[38:13];
+assign w11_2 = dot11[25:0];
+assign w12_2 = dot12[25:0];
+assign w13_2 = dot13[25:0];
+assign w14_2 = dot14[25:0];
+assign w21_2 = dot21[25:0];
+assign w22_2 = dot22[25:0];
+assign w23_2 = dot23[25:0];
+assign w24_2 = dot24[25:0];
+assign w31_2 = dot31[25:0];
+assign w32_2 = dot32[25:0];
+assign w33_2 = dot33[25:0];
+assign w34_2 = dot34[25:0];
+assign w41_2 = dot41[25:0];
+assign w42_2 = dot42[25:0];
+assign w43_2 = dot43[25:0];
+assign w44_2 = dot44[25:0];
 
 always @(posedge clk_mul1) begin
     if (en_mul1) begin

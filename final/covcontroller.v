@@ -12,7 +12,7 @@ module CovController(
 assign CLK_Multi = CLK;
 assign CLK_add_div = CLK;
 
-parameter S0 =0 ,  S1=1, S2=2, S3=3, S4=4;
+parameter S0 = 4'd0, S1=4'd1, S2=4'd2, S3=4'd3, S4=4'd4;
 reg [3:0] state;
 reg [7:0] cnt;
 
@@ -22,14 +22,14 @@ always @ (posedge CLK or negedge GO) begin
 		state <= S0;
 		En_Multi    <= 0;
 		En_add_div  <= 0;
-		COV_busy <= 1;
+		COV_busy <= 1'b1;
 	end
 	else begin
 		case(state)
 			S0:
 				begin
 					state <= S1;
-					En_Multi    <= 1;
+					En_Multi    <= 1'b1;
 					En_add_div  <= 0;
 				end
 			S1:
@@ -37,26 +37,26 @@ always @ (posedge CLK or negedge GO) begin
 					if(cnt == 127) begin
 						cnt<=0;
 						En_Multi  <= 0;
-						En_add_div <= 1	;
+						En_add_div <= 1'b1;
 						state <=S2;
 					end	
 					else begin
-						En_Multi <= 1;
-						En_add_div <= 1;
-						cnt <= cnt+1;
+						En_Multi <= 1'b1;
+						En_add_div <= 1'b1;
+						cnt <= cnt+1'b1;
 					end
 				end
 			S2:
 				begin
 					state <=S3;
 					En_Multi    <= 0;
-					En_add_div  <= 1;
+					En_add_div  <= 1'b1;
 				end
 			S3:
 				begin
 					state<=S4;
 					En_Multi    <= 0;
-					En_add_div  <= 1;
+					En_add_div  <= 1'b1;
 				end		
 			S4:
 				begin

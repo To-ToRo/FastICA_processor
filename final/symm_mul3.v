@@ -7,10 +7,10 @@ module SYMM_MUL3 (
     input signed [25:0] i31, i32, i33, i34,
     input signed [25:0] i41, i42, i43, i44,
 
-    output reg signed [25:0] o11, o12, o13, o14,
-    output reg signed [25:0] o21, o22, o23, o24,
-    output reg signed [25:0] o31, o32, o33, o34,
-    output reg signed [25:0] o41, o42, o43, o44
+    output signed [25:0] o11, o12, o13, o14,
+    output signed [25:0] o21, o22, o23, o24,
+    output signed [25:0] o31, o32, o33, o34,
+    output signed [25:0] o41, o42, o43, o44
 );
 
 reg signed [51:0] wwT11, wwT12, wwT13, wwT14;
@@ -28,22 +28,22 @@ reg signed [51:0] o21_reg, o22_reg, o23_reg, o24_reg;
 reg signed [51:0] o31_reg, o32_reg, o33_reg, o34_reg;
 reg signed [51:0] o41_reg, o42_reg, o43_reg, o44_reg;
 
-assign o11 = o11_reg[38:13];
-assign o12 = o12_reg[38:13];
-assign o13 = o13_reg[38:13];
-assign o14 = o14_reg[38:13];
-assign o21 = o21_reg[38:13];
-assign o22 = o22_reg[38:13];
-assign o23 = o23_reg[38:13];
-assign o24 = o24_reg[38:13];
-assign o31 = o31_reg[38:13];
-assign o32 = o32_reg[38:13];
-assign o33 = o33_reg[38:13];
-assign o34 = o34_reg[38:13];
-assign o41 = o41_reg[38:13];
-assign o42 = o42_reg[38:13];
-assign o43 = o43_reg[38:13];
-assign o44 = o44_reg[38:13];
+assign o11 = o11_reg[25:0];
+assign o12 = o12_reg[25:0];
+assign o13 = o13_reg[25:0];
+assign o14 = o14_reg[25:0];
+assign o21 = o21_reg[25:0];
+assign o22 = o22_reg[25:0];
+assign o23 = o23_reg[25:0];
+assign o24 = o24_reg[25:0];
+assign o31 = o31_reg[25:0];
+assign o32 = o32_reg[25:0];
+assign o33 = o33_reg[25:0];
+assign o34 = o34_reg[25:0];
+assign o41 = o41_reg[25:0];
+assign o42 = o42_reg[25:0];
+assign o43 = o43_reg[25:0];
+assign o44 = o44_reg[25:0];
 
 always @(*) begin
     wwT11 = ((i11 * i11) >>> 13) + ((i12 * i12) >>> 13) + ((i13 * i13) >>> 13) + ((i14 * i14) >>> 13);

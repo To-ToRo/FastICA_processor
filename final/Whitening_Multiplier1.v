@@ -82,8 +82,7 @@ begin
         V41_reg <= 0;
         V42_reg <= 0;
         V43_reg <= 0;
-        V44_reg <= 0;
-            
+        V44_reg <= 0;           
     end
 end
 endmodule
